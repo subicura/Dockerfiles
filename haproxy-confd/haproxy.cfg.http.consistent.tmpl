@@ -1,0 +1,31 @@
+global
+  maxconn 2000
+  log 127.0.0.1 local0
+  log 127.0.0.1 local1 err
+  chroot /var/lib/haproxy
+  user haproxy
+  group haproxy
+  daemon
+
+defaults
+  log     global
+  mode    http
+  option  httplog
+  option  dontlognull
+  option  redispatch
+  timeout connect  5000
+  timeout client  10000
+  timeout server  10000
+
+frontend http
+  bind :80
+  default_backend default
+
+backend default
+  balance source
+  hash-type consistent
+  option httpclose
+  option forwardfor
+  {{range gets "/services/web/*"}}
+  server {{base .Key}} {{.Value}} check
+  {{end}}

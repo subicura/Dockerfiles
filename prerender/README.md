@@ -1,26 +1,26 @@
 # docker-prerender
 
-Dockerfile to build the prerender container image
+Dockerfile to build the prerender docker image
 
 https://prerender.io/
 https://github.com/prerender/prerender
 
-# build
+## build
 
 docker build -t prerender .
 
-# run
+## run
 
 docker run -d -p 9000:3000 prerender
 
-# run with env
+## run with env
 
 docker run -d -p 9000:3000 -e RESOURCE_DOWNLOAD_TIMEOUT=8000 prerender
 
-# log
+## log
 
 docker logs -f [container id]
 
-# test
+## test
 
 http://[server ip]:9000/http://google.com
