@@ -1,0 +1,6 @@
+registry:
+  image: prerender
+  ports:
+    - 9000:3000
+  environment:
+    RESOURCE_DOWNLOAD_TIMEOUT: 8000
