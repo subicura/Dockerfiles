@@ -15,8 +15,7 @@ RUN \
   mkdir -p /app && \
   wget -q -O /app/confd https://github.com/kelseyhightower/confd/releases/download/v0.6.0-alpha3/confd-0.6.0-alpha3-linux-amd64 && \
   chmod +x /app/confd && \
-  mkdir -p /etc/confd/conf.d && \
-  mkdir -p /etc/confd/templates
+  mkdir -p /etc/confd/{conf.d,templates}
 
 # install haproxy
 RUN \

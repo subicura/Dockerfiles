@@ -25,6 +25,8 @@ backend default
   balance roundrobin
   option httpclose
   option forwardfor
-  {{range gets "/services/web/*"}}
+  {{ if ls "/services/web" }}
+  {{ range gets "/services/web/*" }}
   server {{base .Key}} {{.Value}} check
-  {{end}}
+  {{ end }}
+  {{ end }}
