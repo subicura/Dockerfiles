@@ -33,9 +33,13 @@ RUN \
 ADD haproxy.cfg.tmpl /etc/confd/templates/haproxy.cfg.tmpl
 ADD haproxy.toml /etc/confd/conf.d/haproxy.toml
 
+# add run
+ADD run.sh /app/run.sh
+RUN chmod +x /app/run.sh
+
 # expose
 EXPOSE 80
 
 # run
 RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
-CMD /app/confd -interval 10 -node "$(/sbin/ip route|awk '/default/ { print $3 }'):4001" -quiet
+CMD /app/run.sh
