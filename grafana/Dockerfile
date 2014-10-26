@@ -39,6 +39,13 @@ RUN \
 RUN \
   apt-get -qq -y install build-essential software-properties-common python-software-properties git curl
 
+# install python
+RUN \
+  apt-get -qq -y install python python-dev python-pip \
+                        python-simplejson python-memcache python-ldap python-cairo \
+                        python-twisted python-pysqlite2 python-support \
+                        python-pip gunicorn
+
 # install java
 RUN \
   echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
@@ -48,13 +55,6 @@ RUN \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk7-installer
 ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
-
-# install python
-RUN \
-  apt-get -qq -y install python python-dev python-pip \
-                        python-simplejson python-memcache python-ldap python-cairo \
-                        python-twisted python-pysqlite2 python-support \
-                        python-pip gunicorn
 
 # install nginx
 RUN \
