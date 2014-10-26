@@ -17,7 +17,7 @@
 # run command
 #  docker pull subicura/grafana
 #  docker rm -f grafana
-#  docker run -it --rm -p 2003:2003 -p 80:80 -v /grafana/elasticsearch:/data -v /grafana/whisper:/opt/graphite/storage/whisper subicura/grafana /bin/bash
+#  docker run -it --rm -e HOST_IP=10.211.55.41 -e HOST_PORT=80 -p 2003:2003 -p 80:80 -v /grafana/elasticsearch:/data -v /grafana/whisper:/opt/graphite/storage/whisper subicura/grafana /bin/bash
 #  docker run --rm -e HOST_IP=10.211.55.41 -e HOST_PORT=80 -p 2003:2003 -p 80:80 --name grafana -v /grafana/elasticsearch:/data -v /grafana/whisper:/opt/graphite/storage/whisper subicura/grafana
 #  docker run -d -e HOST_IP=10.211.55.41 -e HOST_PORT=80 -e GRAPHITE_API_HOST=10.211.55.41 -p 2003:2003 -p 80:80 --name grafana -v /grafana/elasticsearch:/data -v /grafana/whisper:/opt/graphite/storage/whisper subicura/grafana
 #
