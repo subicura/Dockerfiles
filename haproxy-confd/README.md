@@ -40,7 +40,7 @@ docker run -d -p 80:80 -v ~/confd:/etc/confd subicura/haproxy-confd
 ### reload
 
 ```
-docker exec {service id} "service haproxy reload"
+docker exec {service id} service haproxy reload
 ```
 
 
