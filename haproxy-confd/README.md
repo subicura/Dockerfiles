@@ -34,7 +34,7 @@ docker build -t haproxy-confd .
 ### start
 
 ```
-docker run -d -p 80:80 haproxy-confd
+docker run -d -p 80:80 subicura/haproxy-confd
 ```
 
 ### reload
@@ -48,10 +48,4 @@ docker exec {service id} "service haproxy reload"
 
 ```
 docker logs -f [container id]
-```
-
-## test
-
-```
-etcdctl set /services/web/web_1 facebook.com:80
 ```
