@@ -1,22 +1,22 @@
 FROM ubuntu:14.04
 MAINTAINER chungsub.kim@purpleworks.co.kr
 
+ENV DEBIAN_FRONTEND noninteractive 
+
 # update ubuntu latest
 RUN \
-  DEBIAN_FRONTEND=noninteractive apt-get -qq update && \
-  DEBIAN_FRONTEND=noninteractive apt-get -qq -y dist-upgrade #2014.08.24
+  apt-get -qq update && \
+  apt-get -qq -y dist-upgrade #2014.11.05
 
 # install essential packages
 RUN \
-  DEBIAN_FRONTEND=noninteractive apt-get -qq -y install build-essential software-properties-common python-software-properties git wget
+  apt-get -qq -y install build-essential software-properties-common python-software-properties git curl
 
 # install confd
 RUN \
   mkdir -p /app && \
-  wget -q -O /app/confd https://github.com/kelseyhightower/confd/releases/download/v0.6.0-alpha3/confd-0.6.0-alpha3-linux-amd64 && \
-  chmod +x /app/confd && \
-  mkdir -p /etc/confd/conf.d && \
-  mkdir -p /etc/confd/templates
+  curl -s -L -o /app/confd https://github.com/kelseyhightower/confd/releases/download/v0.6.3/confd-0.6.3-linux-amd64 && \
+  chmod +x /app/confd
 
 # install haproxy
 RUN \
@@ -31,16 +31,17 @@ RUN \
   echo "$UDPServerRun 514" >> /etc/rsyslog.conf
 
 # add confd config
-ADD haproxy.cfg.tmpl /etc/confd/templates/haproxy.cfg.tmpl
-ADD haproxy.toml /etc/confd/conf.d/haproxy.toml
+ADD haproxy.cfg.tmpl /root/haproxy.cfg.tmpl
+ADD haproxy.toml /root/haproxy.toml
 
-# add run
-ADD run.sh /app/run.sh
-RUN chmod +x /app/run.sh
+# volume
+VOLUME ["/etc/confd"]
 
 # expose
 EXPOSE 80
 
 # run
-RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+ADD run.sh /app/run.sh
+RUN chmod +x /app/run.sh
 CMD /app/run.sh
+

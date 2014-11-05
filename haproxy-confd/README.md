@@ -19,12 +19,39 @@ etcdctl set /services/web/web_1 172.17.8.101:49153
 
 ## build
 
+```
 docker build -t haproxy-confd .
+```
 
 ## run
 
+### options
+
+- -p {local port}:80
+- -e ETCD_PEER={etcd peer ip:port address}
+- -v {local config}:/etc/confd
+
+### start
+
+```
 docker run -d -p 80:80 haproxy-confd
+```
+
+### reload
+
+```
+docker exec {service id} "service haproxy reload"
+```
+
 
 ## log
 
+```
 docker logs -f [container id]
+```
+
+## test
+
+```
+etcdctl set /services/web/web_1 facebook.com:80
+```
