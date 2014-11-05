@@ -34,7 +34,7 @@ docker build -t haproxy-confd .
 ### start
 
 ```
-docker run -d -p 80:80 subicura/haproxy-confd
+docker run -d -p 80:80 -v ~/confd:/etc/confd subicura/haproxy-confd
 ```
 
 ### reload
