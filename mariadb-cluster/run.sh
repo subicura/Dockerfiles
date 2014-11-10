@@ -6,6 +6,9 @@ if [ -n "${GALERA_NODES}" ]; then
   echo "GALERA_NODES variable is set."
   echo "GALERA_NODES='${GALERA_NODES}'" >> /etc/default/garb
   echo "GALERA_GROUP='${CLUSTER_NAME}'" >> /etc/default/garb
+  echo "LOG_FILE='/var/log/garb.log'"   >> /etc/default/garb
+  service garb start
+  tail -f /var/log/garb.log
 
   exit 1
 fi
