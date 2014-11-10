@@ -1,0 +1,27 @@
+[mysqld]
+# General MariaDB Option
+bind-address                   = 0.0.0.0
+datadir                        = /var/lib/mysql
+innodb_buffer_pool_size        = 4G
+
+innodb_log_file_size  = 100M
+innodb_file_per_table = 1
+innodb_flush_log_at_trx_commit = 2
+
+# Galera Cluster
+wsrep_provider = /usr/lib/galera/libgalera_smm.so
+wsrep_retry_autocommit = 0
+wsrep_sst_method = xtrabackup
+wsrep_provider_options = "gcache.size = 512M; gcache.name = /tmp/galera.cache; gcache.page_size = 100M"
+wsrep_slave_threads=16
+#wsrep_replication_myisam = 1
+#wsrep_sst_receive_address = <x.x.x.x>
+#wsrep_notify_cmd="script.sh"
+
+# Other MariaDB options
+binlog_format = ROW
+innodb_autoinc_lock_mode = 2
+innodb_flush_log_at_trx_commit = 2
+
+innodb_locks_unsafe_for_binlog = 1
+query_cache_size = 0
