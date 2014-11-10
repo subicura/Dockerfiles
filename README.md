@@ -17,3 +17,7 @@ whoami sample web server
 ### [grafana](https://github.com/subicura/Dockerfiles/tree/master/grafana)
 
 grafana all in one
+
+### [mariadb-cluster](https://github.com/subicura/Dockerfiles/tree/master/mariadb-cluster)
+
+mariadb galera cluster
