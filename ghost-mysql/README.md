@@ -8,7 +8,7 @@ Dockerfile to build the ghost docker image
 
 ```
 docker run --rm -v /data/ghost/mysql:/var/lib/mysql tutum/mysql /bin/bash -c "/usr/bin/mysql_install_db"
-docker run --name=db -d -e MYSQL_GHOST_PASS=new-ghost-password -p 3306:3306 -v /data/ghost/mysql:/var/lib/mysql tutum/mysql
+docker run --name=db -d -e MYSQL_GHOST_PASS=new-ghost-password -v /data/ghost/mysql:/var/lib/mysql tutum/mysql
 
 # change admin password
 docker exec -it db /bin/bash
