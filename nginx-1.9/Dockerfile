@@ -32,16 +32,16 @@ RUN \
   cd /tmp && \
   wget -q -O - http://nginx.org/download/nginx-1.9.0.tar.gz | tar xfz - && \
   cd nginx-1.9.0 && \
-  ./configure --prefix=/usr/local/nginx --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module && \
+  ./configure --prefix=/usr/local/nginx --with-stream --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module && \
   make && make install
 
 # set config path
 ADD ./nginx.conf /usr/local/nginx/conf/nginx.conf
 ADD ./proxy_params /usr/local/nginx/conf/proxy_params
-RUN mkdir /usr/local/nginx/conf/sites
+RUN mkdir /usr/local/nginx/conf/sites && mkdir /usr/local/nginx/conf/streams
 
 # volume
-VOLUME ["/usr/local/nginx/conf/sites"]
+VOLUME ["/usr/local/nginx/conf/sites", "/usr/local/nginx/conf/streams"]
 
 # expose
 EXPOSE 80 443
