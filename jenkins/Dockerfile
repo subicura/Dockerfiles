@@ -4,7 +4,8 @@
 # build:
 #   docker build --force-rm=true -t subicura/jenkins .
 # run:
-#   docker run -p 80:8080 -v /home/ubuntu/jenkins:/app/jenkins -d subicura/jenkins
+#   docker run -p 80:8080 -v /home/ubuntu/jenkins:/app/jenkins -v /var/run/docker.sock:/var/run/docker.sock \
+#                         -d subicura/jenkins
 #
 
 FROM ubuntu:14.04
@@ -13,14 +14,14 @@ MAINTAINER chungsub.kim@purpleworks.co.kr
 ENV DEBIAN_FRONTEND noninteractive
 
 # update ubuntu latest
-RUN echo "2015.05.18"
+RUN echo "2015.05.22"
 RUN \
   apt-get -qq update && \
   apt-get -qq -y dist-upgrade
 
 # install essential packages
 RUN \
-  apt-get -qq -y install build-essential software-properties-common git wget
+  apt-get -qq -y install build-essential software-properties-common git wget curl
 
 # install java
 RUN \
@@ -51,6 +52,17 @@ RUN \
   mkdir -p ~/.rbenv/plugins && \
   git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
+# install node
+RUN \
+  curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash - && \
+  apt-get -qq -y install nodejs && \
+  npm install -g bower && \
+  npm install -g grunt-cli
+
+# install docker
+RUN \
+  curl -s https://get.docker.io/ubuntu/ | sudo sh 
+
 # setup jenkins
 WORKDIR /app
 RUN mkdir jenkins
@@ -72,7 +84,6 @@ RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rbenv.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rake.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ruby-runtime.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rubyMetrics.hpi
-
 
 # volume
 VOLUME ["/app/jenkins"]
