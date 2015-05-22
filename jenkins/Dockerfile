@@ -4,7 +4,7 @@
 # build:
 #   docker build --force-rm=true -t subicura/jenkins .
 # run:
-#   docker run -p 8080:8080 -v /home/ubuntu/jenkins:/app/jenkins -d subicura/jenkins
+#   docker run -p 80:8080 -v /home/ubuntu/jenkins:/app/jenkins -d subicura/jenkins
 #
 
 FROM ubuntu:14.04
@@ -43,14 +43,36 @@ RUN \
 RUN \
   cd /app/tomcat/webapps && \
   rm -rf * && \
-  wget -q http://mirrors.jenkins-ci.org/war/latest/jenkins.war -O ROOT.war
+  wget -q http://mirrors.jenkins-ci.org/war/1.614/jenkins.war -O ROOT.war
+
+# install rbenv
+RUN \
+  git clone https://github.com/sstephenson/rbenv.git ~/.rbenv && \
+  mkdir -p ~/.rbenv/plugins && \
+  git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
 # setup jenkins
 WORKDIR /app
-RUN \
-  mkdir jenkins
+RUN mkdir jenkins
 ENV JENKINS_HOME /app/jenkins
-ENV CATALINA_OPTS "-Dfile.encoding=UTF-8 -Xmx512m -Xmx1024m -XX:MaxPermSize=512M -Djava.awt.headless=true"
+
+# add plugins
+RUN mkdir -p /app/plugins
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/scm-api.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/git.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/git-client.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/git-server.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ssh-agent.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/slack.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/violations.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ansicolor.hpi
+
+# add plugins (ruby)
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rbenv.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rake.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ruby-runtime.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rubyMetrics.hpi
+
 
 # volume
 VOLUME ["/app/jenkins"]
@@ -61,4 +83,3 @@ EXPOSE 80 443
 # run
 ADD run.sh /app/run.sh
 CMD /app/run.sh
-#CMD /usr/local/nginx/sbin/nginx
