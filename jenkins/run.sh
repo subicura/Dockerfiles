@@ -19,8 +19,7 @@ ln -s /app/jenkins/npm /root/.npm
 # docker in docker
 docker $DOCKER_OPTS -H unix:///var/run.docker.sock -d &
 
-#CATALINA_OPTS="-Dfile.encoding=UTF-8 -Xmx512m -Xmx1024m -XX:MaxPermSize=512M -Djava.awt.headless=true"
-CATALINA_OPTS="-Djava.security.egd=file:/dev/./urandom -Dfile.encoding=UTF-8 -Djava.awt.headless=true"
+CATALINA_OPTS="-Djava.security.egd=file:/dev/./urandom -Dfile.encoding=UTF-8 -Xmx512m -Xmx1024m -XX:MaxPermSize=512M -Djava.awt.headless=true"
 
 # copy plugins
 if [ ! -d /app/jenkins/home/plugins ] ; then
