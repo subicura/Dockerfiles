@@ -4,7 +4,8 @@
 # build:
 #   docker build --force-rm=true -t subicura/jenkins .
 # run:
-#   docker run -p 80:8080 -v /home/ubuntu/jenkins:/app/jenkins -v /var/run/docker.sock:/var/run/docker.sock \
+#   docker run -p 80:8080 -v /home/ubuntu/jenkins:/app/jenkins \
+#                         -v /var/run/docker.sock:/var/run/docker.sock \
 #                         -d subicura/jenkins
 #
 
@@ -22,6 +23,10 @@ RUN \
 # install essential packages
 RUN \
   apt-get -qq -y install build-essential software-properties-common git wget curl
+
+# install dev library
+RUN \
+  apt-get -qq -y install bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev libffi-dev libmysqlclient-dev imagemagick libmagickcore-dev libmagickwand-dev
 
 # install java
 RUN \
@@ -65,8 +70,7 @@ RUN \
 
 # setup jenkins
 WORKDIR /app
-RUN mkdir jenkins
-ENV JENKINS_HOME /app/jenkins
+ENV JENKINS_HOME /app/jenkins/home
 
 # add plugins
 RUN mkdir -p /app/plugins
@@ -85,12 +89,20 @@ RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rake.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ruby-runtime.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rubyMetrics.hpi
 
+# env
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+ENV TERM xterm
+
 # volume
 VOLUME ["/app/jenkins"]
 
 # expose
-EXPOSE 80 443
+EXPOSE 8080
 
 # run
 ADD run.sh /app/run.sh
 CMD /app/run.sh
+
