@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# docker version
+if [ -n "$DOCKER_VERSION" ] ; then
+  wget https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION} -O /usr/bin/docker
+fi
+
 # rbenv
 if [ ! -d /app/jenkins/rbenv ] ; then
   mkdir -p /app/jenkins/rbenv
