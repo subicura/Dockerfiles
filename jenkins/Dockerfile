@@ -49,7 +49,7 @@ RUN \
 RUN \
   cd /app/tomcat/webapps && \
   rm -rf * && \
-  wget -q http://mirrors.jenkins-ci.org/war/1.614/jenkins.war -O ROOT.war
+  wget -q http://mirrors.jenkins-ci.org/war/latest/jenkins.war -O ROOT.war
 
 # install rbenv
 RUN \
