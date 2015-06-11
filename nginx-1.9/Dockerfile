@@ -24,13 +24,13 @@ RUN \
 RUN \
   apt-get -qq -y install build-essential software-properties-common git wget
 
-# install nginx-1.9
+# install nginx-1.9.1
 RUN \
   apt-get -qq -y install libssl-dev libpcre3-dev
 
 RUN \
   cd /tmp && \
-  wget -q -O - http://nginx.org/download/nginx-1.9.0.tar.gz | tar xfz - && \
+  wget -q -O - http://nginx.org/download/nginx-1.9.1.tar.gz | tar xfz - && \
   cd nginx-1.9.0 && \
   ./configure --prefix=/usr/local/nginx --with-stream --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module && \
   make && make install
