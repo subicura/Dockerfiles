@@ -1,5 +1,5 @@
 #
-# nginx 1.9.0 (http://nginx.org)
+# nginx 1.9.1 (http://nginx.org)
 #
 # build:
 #   docker build --force-rm=true -t subicura/nginx-1.9 .
@@ -31,7 +31,7 @@ RUN \
 RUN \
   cd /tmp && \
   wget -q -O - http://nginx.org/download/nginx-1.9.1.tar.gz | tar xfz - && \
-  cd nginx-1.9.0 && \
+  cd nginx-1.9.1 && \
   ./configure --prefix=/usr/local/nginx --with-stream --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module && \
   make && make install
 
