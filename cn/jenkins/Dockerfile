@@ -53,7 +53,7 @@ RUN \
 # install jenkins
 RUN \
   rm -rf /app/tomcat/webapps/*
-ADD jenkins.war /app/tomcat/webapps
+ADD jenkins.war /app/tomcat/webapps/ROOT.war
 
 # install rbenv
 RUN \
