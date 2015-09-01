@@ -1,0 +1,9 @@
+mysql:
+  ports:
+   - "3306:3306"
+  volumes:
+   - ./data:/var/lib/mysql
+  environment:
+   - MYSQL_PASS=secret
+  image: tutum/mysql:5.6
+  
