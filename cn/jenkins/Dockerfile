@@ -52,9 +52,8 @@ RUN \
 
 # install jenkins
 RUN \
-  cd /app/tomcat/webapps && \
-  rm -rf * && \
-  wget -q http://mirrors.jenkins-ci.org/war/latest/jenkins.war -O ROOT.war
+  rm -rf /app/tomcat/webapps/*
+ADD ./jenkins.war /app/tomcat/webapps
 
 # install rbenv
 RUN \
