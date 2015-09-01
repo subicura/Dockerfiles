@@ -1,0 +1,20 @@
+version: 0.1
+log:
+  level: info
+  fields:
+    service: registry
+    environment: production
+storage:
+    cache:
+        blobdescriptor: inmemory
+    filesystem:
+        rootdirectory: /tmp/registry-dev
+    maintenance:
+        uploadpurging:
+            enabled: true
+            age: 168h
+            interval: 24h
+            dryrun: false
+http:
+    addr: :5000
+    secret: 1q2w3e4r

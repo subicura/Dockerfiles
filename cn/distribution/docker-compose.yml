@@ -1,0 +1,7 @@
+registry:
+  ports:
+   - "5000:5000"
+  volumes:
+   - ./config.yml:/go/src/github.com/docker/distribution/cmd/registry/config.yml
+   - /home/ubuntu/compose/distribution/data:/tmp/registry-dev
+  image: distribution/registry:2.1.1

@@ -3,6 +3,6 @@ nginx:
    - "80:80"
    - "443:443"
   volumes:
-   - ./data:/etc/nginx/conf.d
+   - ./data:/usr/local/nginx/conf/sites
   image: subicura/nginx:1.9
   
