@@ -1,0 +1,8 @@
+redis:
+  ports:
+  - "6379:6379"
+  volumes:
+  - /data/redis:/var/lib/redis
+  image: redis:3.0.3
+  command: redis-server
+  
