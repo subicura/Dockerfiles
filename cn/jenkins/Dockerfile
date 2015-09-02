@@ -109,5 +109,6 @@ EXPOSE 8080
 
 # run
 ADD run.sh /app/run.sh
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 CMD /app/run.sh
 
