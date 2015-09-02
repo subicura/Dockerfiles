@@ -24,7 +24,7 @@ ln -s /app/jenkins/npm /root/.npm
 # docker in docker
 docker $DOCKER_OPTS -H unix:///var/run.docker.sock -d &
 
-export CATALINA_OPTS="-Djava.security.egd=file:/dev/./urandom -Dfile.encoding=UTF-8 -Xms1024m -Xmx2048m -XX:MaxPermSize=512m -XX:MaxPermSize=1024m -Djava.awt.headless=true"
+export CATALINA_OPTS="-Djava.security.egd=file:/dev/./urandom -Dfile.encoding=UTF-8 -Xms1024m -Xmx2048m -XX:MaxPermSize=512m -XX:MaxPermSize=1024m -Djava.awt.headless=true -Dorg.apache.commons.jelly.tags.fmt.timeZone=TZ"
 export JENKINS_JAVA_OPTIONS="-Duser.timezone=Asia/Shanghai"
 
 # copy plugins
