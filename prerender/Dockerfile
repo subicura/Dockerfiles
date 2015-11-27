@@ -1,4 +1,4 @@
-FROM dockerfile/nodejs
+FROM node:4.2.2
 MAINTAINER chungsub.kim@purpleworks.co.kr
 
 # update ubuntu latest
