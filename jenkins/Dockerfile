@@ -15,7 +15,7 @@ MAINTAINER chungsub.kim@purpleworks.co.kr
 ENV DEBIAN_FRONTEND noninteractive
 
 # update ubuntu latest
-RUN echo "2015.05.22"
+RUN echo "2015.11.30"
 RUN \
   apt-get -qq update && \
   apt-get -qq -y dist-upgrade
@@ -42,8 +42,8 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 RUN \
   mkdir /app && \
   cd /app && \
-  wget -q -O - http://mirror.apache-kr.org/tomcat/tomcat-7/v7.0.62/bin/apache-tomcat-7.0.62.tar.gz | tar xfz - && \
-  ln -s apache-tomcat-7.0.62 tomcat
+  wget -q -O - http://mirror.apache-kr.org/tomcat/tomcat-7/v7.0.65/bin/apache-tomcat-7.0.65.tar.gz | tar xfz - && \
+  ln -s apache-tomcat-7.0.65 tomcat
 
 # install jenkins
 RUN \
