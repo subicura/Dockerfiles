@@ -78,6 +78,7 @@ RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/scm-api.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/git.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/git-client.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/git-server.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/workflow-step-api.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ssh-agent.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/slack.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/violations.hpi
