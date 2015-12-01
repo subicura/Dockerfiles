@@ -66,7 +66,7 @@ RUN \
 
 # install docker
 RUN \
-  curl -s https://get.docker.io/ubuntu/ | sudo sh 
+  curl -sSL https://get.docker.com/ | sh
 
 # setup jenkins
 WORKDIR /app
