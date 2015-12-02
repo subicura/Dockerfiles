@@ -104,6 +104,7 @@ VOLUME ["/app/jenkins"]
 EXPOSE 8080
 
 # run
+RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 ADD run.sh /app/run.sh
 CMD /app/run.sh
 
