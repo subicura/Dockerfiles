@@ -15,7 +15,7 @@ MAINTAINER chungsub.kim@purpleworks.co.kr
 ENV DEBIAN_FRONTEND noninteractive
 
 # update ubuntu latest
-RUN echo "2015.11.30"
+RUN echo "2015.12.08"
 RUN \
   apt-get -qq update && \
   apt-get -qq -y dist-upgrade
