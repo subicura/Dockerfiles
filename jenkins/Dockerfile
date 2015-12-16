@@ -42,8 +42,8 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 RUN \
   mkdir /app && \
   cd /app && \
-  wget -q -O - http://mirror.apache-kr.org/tomcat/tomcat-7/v7.0.65/bin/apache-tomcat-7.0.65.tar.gz | tar xfz - && \
-  ln -s apache-tomcat-7.0.65 tomcat
+  wget -q -O - http://mirror.apache-kr.org/tomcat/tomcat-7/v7.0.67/bin/apache-tomcat-7.0.67.tar.gz | tar xfz - && \
+  ln -s apache-tomcat-7.0.67 tomcat
 
 # install jenkins
 RUN \
@@ -59,7 +59,7 @@ RUN \
 
 # install node
 RUN \
-  curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash - && \
+  curl -sL https://deb.nodesource.com/setup_5.x | bash - && \
   apt-get -qq -y install nodejs && \
   npm install -g bower && \
   npm install -g grunt-cli
