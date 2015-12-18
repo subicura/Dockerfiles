@@ -83,6 +83,7 @@ RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ssh-agent.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/slack.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/violations.hpi
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ansicolor.hpi
+RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/gitlab-hook.hpi
 
 # add plugins (ruby)
 RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rbenv.hpi
