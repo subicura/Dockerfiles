@@ -6,6 +6,7 @@
 # run:
 #   docker run -p 80:8080 -v /home/ubuntu/jenkins:/app/jenkins \
 #                         -v /var/run/docker.sock:/var/run/docker.sock \
+#                         -v /usr/bin/docker:/usr/bin/docker \
 #                         -d subicura/jenkins
 #
 
