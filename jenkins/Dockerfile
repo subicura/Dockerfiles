@@ -66,8 +66,8 @@ RUN \
   npm install -g grunt-cli
 
 # install docker
-# RUN \
-#   curl -sSL https://get.docker.com/ | sh
+RUN \
+  curl -sSL https://get.docker.com/ | sh
 
 # setup jenkins
 WORKDIR /app
