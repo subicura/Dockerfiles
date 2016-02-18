@@ -43,3 +43,5 @@ Then open up a browser and navigate to
 ```
 http://{boot2docker ip}:8081
 ```
+
+Mysql - `GRANT ALL ON *.* TO admin@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION; FLUSH PRIVILEGES`
