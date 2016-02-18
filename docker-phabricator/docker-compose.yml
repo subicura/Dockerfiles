@@ -1,0 +1,9 @@
+phabricator:
+  image: subicura/phabricator
+  ports: ['8081:80']
+  environment:
+   - MYSQL_HOST=xxx
+   - MYSQL_USER=phabricator
+   - MYSQL_PASS=password
+  volumes:
+    - /data/phabricator/repo/:/var/repo/

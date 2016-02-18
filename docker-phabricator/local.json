@@ -1,0 +1,7 @@
+{
+      "storage.default-namespace": "default",
+      "mysql.host": "{{MYSQL_HOST}}",
+      "mysql.user": "{{MYSQL_USER}}",
+      "mysql.pass": "{{MYSQL_PASS}}",
+      "pygments.enabled": true
+}
