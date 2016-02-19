@@ -69,6 +69,7 @@ RUN     echo "www-data ALL=(ALL) SETENV: NOPASSWD: /opt/phabricator/support/bin/
 # Custom
 RUN     echo "date.timezone=Asia/Seoul" >> /etc/php5/apache2/php.ini
 RUN     echo "max_input_vars = 2048" >> /etc/php5/apache2/php.ini
+RUN     mkdir /upload && chown www-data:www-data /upload
 
 VOLUME ["/upload"]
 EXPOSE  80
