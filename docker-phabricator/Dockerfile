@@ -46,6 +46,8 @@ WORKDIR /opt
 RUN     bash download.sh phabricator 82ca92a9ef
 RUN     bash download.sh arcanist    fcc11b3a27
 RUN     bash download.sh libphutil   f43291e99d
+# LDAP BUG? or NOT?
+RUN     sed -i 's/\$distinguished_name, \$login_pass/\$this->anonymousUsername, \$this->anonymousPassword/' /opt/libphutil/src/auth/PhutilLDAPAuthAdapter.php
 
 # Setup apache
 RUN     a2enmod rewrite
