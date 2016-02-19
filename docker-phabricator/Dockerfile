@@ -57,8 +57,9 @@ RUN     ln -s /etc/apache2/sites-available/phabricator.conf \
 # Setup phabricator
 RUN     mkdir -p /opt/phabricator/conf/local /var/repo
 ADD     local.json /opt/phabricator/conf/local/local.json
-RUN     sed -e 's/post_max_size = 8M/post_max_size = 32M/' \
-          -e 's/upload_max_filesize = 2M/upload_max_filesize = 32M/' \
+RUN     sed -e 's/post_max_size = 8M/post_max_size = 128M/' \
+          -e 's/upload_max_filesize = 2M/upload_max_filesize = 128M/' \
+          -e 's/memory_limit = 128M/memory_limit = 256M/' \
           -e 's/;opcache.validate_timestamps=1/opcache.validate_timestamps=0/' \
           -i /etc/php5/apache2/php.ini
 RUN     ln -s /usr/lib/git-core/git-http-backend /opt/phabricator/support/bin
@@ -67,6 +68,7 @@ RUN     echo "www-data ALL=(ALL) SETENV: NOPASSWD: /opt/phabricator/support/bin/
 
 # Custom
 RUN     echo "date.timezone=Asia/Seoul" >> /etc/php5/apache2/php.ini
+RUN     echo "max_input_vars = 2048" >> /etc/php5/apache2/php.ini
 
 EXPOSE  80
 ADD     entrypoint.sh /entrypoint.sh
