@@ -1,1 +1,2 @@
 apache: /usr/sbin/apache2 -DFOREGROUND
+aphlict: /opt/phabricator/bin/aphlict start

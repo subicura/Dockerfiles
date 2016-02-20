@@ -59,6 +59,11 @@ RUN \
   curl -s -L -o /usr/local/bin/forego https://github.com/subicura/forego/releases/download/dev/forego && \
   chmod +x /usr/local/bin/forego
 
+# Install node
+RUN \
+  curl -sL https://deb.nodesource.com/setup_5.x | bash - && \
+  apt-get -qq -y install nodejs
+
 # Setup phabricator
 RUN     mkdir -p /opt/phabricator/conf/local /var/repo
 ADD     local.json /opt/phabricator/conf/local/local.json
@@ -76,9 +81,12 @@ RUN     echo "date.timezone=Asia/Seoul" >> /etc/php5/apache2/php.ini
 RUN     echo "max_input_vars = 2048" >> /etc/php5/apache2/php.ini
 RUN     mkdir /upload && chown www-data:www-data /upload
 
+# For notification
+RUN     cd /opt/phabricator/support/aphlict/server && npm install ws
+
 VOLUME ["/upload"]
 EXPOSE  80
-ADD     Procfile /Procfile
+ADD     Procfile /opt/Procfile
 ADD     entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD     ["start-server"]
