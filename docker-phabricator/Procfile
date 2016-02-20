@@ -1,1 +1,1 @@
-apache: su - www-data -c "/opt/phabricator/bin/aphlict start" && /usr/sbin/apache2 -DFOREGROUND
+apache: su - www-data -c "/opt/phabricator/bin/aphlict start --client-port=22280" && /usr/sbin/apache2 -DFOREGROUND
