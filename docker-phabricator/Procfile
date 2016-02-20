@@ -1,0 +1,1 @@
+apache: /usr/sbin/apache2 -DFOREGROUND

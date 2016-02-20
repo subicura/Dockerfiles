@@ -54,6 +54,11 @@ RUN     ln -s /etc/apache2/sites-available/phabricator.conf \
             /etc/apache2/sites-enabled/phabricator.conf && \
         rm -f /etc/apache2/sites-enabled/000-default.conf
 
+# Install forego
+RUN \
+  curl -s -L -o /usr/local/bin/forego https://github.com/subicura/forego/releases/download/dev/forego && \
+  chmod +x /usr/local/bin/forego
+
 # Setup phabricator
 RUN     mkdir -p /opt/phabricator/conf/local /var/repo
 ADD     local.json /opt/phabricator/conf/local/local.json
@@ -73,6 +78,7 @@ RUN     mkdir /upload && chown www-data:www-data /upload
 
 VOLUME ["/upload"]
 EXPOSE  80
+ADD     Procfile /Procfile
 ADD     entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD     ["start-server"]
