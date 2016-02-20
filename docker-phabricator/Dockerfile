@@ -82,6 +82,7 @@ RUN     echo "max_input_vars = 2048" >> /etc/php5/apache2/php.ini
 RUN     mkdir /upload && chown www-data:www-data /upload
 
 # For notification
+RUN     chsh -s /bin/bash www-data
 RUN     cd /opt/phabricator/support/aphlict/server && npm install ws
 
 VOLUME ["/upload"]

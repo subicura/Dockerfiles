@@ -1,2 +1,2 @@
 apache: /usr/sbin/apache2 -DFOREGROUND
-aphlict: /opt/phabricator/bin/aphlict start
+aphlict: su - www-data -c "/opt/phabricator/bin/aphlict start"
