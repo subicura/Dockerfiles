@@ -85,6 +85,7 @@ RUN     mkdir /upload && chown www-data:www-data /upload
 RUN     chsh -s /bin/bash www-data
 RUN     touch /var/log/aphlict.log && chown www-data:www-data /var/log/aphlict.log
 RUN     cd /opt/phabricator/support/aphlict/server && npm install ws
+RUN     sed -i 's/$request->isHTTPS()/$client_uri->getProtocol() == "https"/' /opt/phabricator/src/view/page/PhabricatorStandardPageView.php
 
 VOLUME ["/upload"]
 EXPOSE  80
