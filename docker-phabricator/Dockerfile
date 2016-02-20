@@ -83,6 +83,7 @@ RUN     mkdir /upload && chown www-data:www-data /upload
 
 # For notification
 RUN     chsh -s /bin/bash www-data
+RUN     touch /var/log/aphlict.log && chown www-data:www-data /var/log/aphlict.log
 RUN     cd /opt/phabricator/support/aphlict/server && npm install ws
 
 VOLUME ["/upload"]
