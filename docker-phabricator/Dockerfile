@@ -35,6 +35,8 @@ RUN \
         subversion \
         tar \
         sudo \
+        build-essential \
+        vim \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # For some reason phabricator doesn't have tagged releases. To support
