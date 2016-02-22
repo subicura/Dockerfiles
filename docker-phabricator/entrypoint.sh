@@ -14,6 +14,9 @@ else
   echo "${LOCAL_JSON}" > /opt/phabricator/conf/local/local.json
 fi
 
+# compile
+TERM=xterm /opt/arcanist/bin/arc liberate /opt/phabricator
+
 if [ "${1}" = "start-server" ]; then
   exec bash -c "/opt/phabricator/bin/storage upgrade --force; /opt/phabricator/bin/phd start; source /etc/apache2/envvars; /usr/local/bin/forego start"
 else
