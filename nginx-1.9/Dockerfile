@@ -2,11 +2,11 @@
 # nginx 1.9.x (http://nginx.org)
 #
 # build:
-#   docker build --force-rm=true -t subicura/nginx-1.9 .
+#   docker build --force-rm=true -t subicura/nginx:1.9 .
 # run:
-#   docker run -p 80:80 -v /data/nginx/sites:/usr/local/nginx/conf/sites -d subicura/nginx-1.9
+#   docker run -p 80:80 -v /data/nginx/sites:/usr/local/nginx/conf/sites -d subicura/nginx:1.9
 # reload
-#   docker exec [container id] /usr/local/nginx/sbin/nginx -s reload
+#   docker exec [container id] /usr/local/sbin/nginx -s reload
 #
 
 FROM alpine:latest
