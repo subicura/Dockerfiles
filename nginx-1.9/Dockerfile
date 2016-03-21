@@ -18,8 +18,8 @@ ENV NGINX_VERSION nginx-1.9.12
 RUN apk --update add openssl-dev pcre-dev zlib-dev wget build-base && \
     mkdir -p /tmp/src && \
     cd /tmp/src && \
-    wget -q -O - http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar xfz - && \
-    cd nginx-${NGINX_VERSION} && \
+    wget -q -O - http://nginx.org/download/${NGINX_VERSION}.tar.gz | tar xfz - && \
+    cd ${NGINX_VERSION} && \
     ./configure \
     	--with-stream \
     	--with-http_ssl_module \
@@ -40,7 +40,7 @@ RUN mkdir /usr/local/nginx/conf/sites && mkdir /usr/local/nginx/conf/streams
 # volume
 VOLUME ["/usr/local/nginx/conf/sites", "/usr/local/nginx/conf/streams"]
 
-WORKDIR /usr/local/nginx-${NGINX_VERSION}
+WORKDIR /usr/local/${NGINX_VERSION}
 
 EXPOSE 80 443
 
