@@ -1,41 +1,38 @@
 #
-# nginx 1.9.1 (http://nginx.org)
+# nginx 1.9.x (http://nginx.org)
 #
 # build:
 #   docker build --force-rm=true -t subicura/nginx-1.9 .
 # run:
-#   docker run -p 80:80 -v /home/ubuntu/sites:/usr/local/nginx/conf/sites -d subicura/nginx-1.9
+#   docker run -p 80:80 -v /data/nginx/sites:/usr/local/nginx/conf/sites -d subicura/nginx-1.9
 # reload
 #   docker exec [container id] /usr/local/nginx/sbin/nginx -s reload
 #
 
-FROM ubuntu:14.04
-MAINTAINER chungsub.kim@purpleworks.co.kr
+FROM alpine:latest
 
-ENV DEBIAN_FRONTEND noninteractive
+MAINTAINER subicura@subicura.com
 
-# update ubuntu latest
-RUN echo "2015.05.18"
-RUN \
-  apt-get -qq update && \
-  apt-get -qq -y dist-upgrade
+ENV NGINX_VERSION nginx-1.9.12
 
-# install essential packages
-RUN \
-  apt-get -qq -y install build-essential software-properties-common git wget
+RUN apk --update add openssl-dev pcre-dev zlib-dev wget build-base && \
+    mkdir -p /tmp/src && \
+    cd /tmp/src && \
+    wget -q -O - http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar xfz - && \
+    cd nginx-${NGINX_VERSION} && \
+    ./configure \
+    	--with-stream \
+    	--with-http_ssl_module \
+        --with-http_stub_status_module \
+        --with-http_gzip_static_module \
+        --with-http_realip_module \
+        --sbin-path=/usr/local/sbin/nginx && \
+    make && \
+    make install && \
+    apk del build-base && \
+    rm -rf /tmp/src && \
+    rm -rf /var/cache/apk/*
 
-# install nginx-1.9.1
-RUN \
-  apt-get -qq -y install libssl-dev libpcre3-dev
-
-RUN \
-  cd /tmp && \
-  wget -q -O - http://nginx.org/download/nginx-1.9.1.tar.gz | tar xfz - && \
-  cd nginx-1.9.1 && \
-  ./configure --prefix=/usr/local/nginx --with-stream --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module && \
-  make && make install
-
-# set config path
 ADD ./nginx.conf /usr/local/nginx/conf/nginx.conf
 ADD ./proxy_params /usr/local/nginx/conf/proxy_params
 RUN mkdir /usr/local/nginx/conf/sites && mkdir /usr/local/nginx/conf/streams
@@ -43,8 +40,8 @@ RUN mkdir /usr/local/nginx/conf/sites && mkdir /usr/local/nginx/conf/streams
 # volume
 VOLUME ["/usr/local/nginx/conf/sites", "/usr/local/nginx/conf/streams"]
 
-# expose
+WORKDIR /usr/local/nginx-${NGINX_VERSION}
+
 EXPOSE 80 443
 
-# run
-CMD /usr/local/nginx/sbin/nginx
+CMD /usr/local/sbin/nginx
