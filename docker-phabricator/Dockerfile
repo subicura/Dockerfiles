@@ -44,10 +44,10 @@ RUN \
 ADD     download.sh /opt/download.sh
 WORKDIR /opt
 
-# 20160219
-RUN     bash download.sh phabricator 82ca92a9ef
-RUN     bash download.sh arcanist    fcc11b3a27
-RUN     bash download.sh libphutil   f43291e99d
+# 20160329
+RUN     bash download.sh phabricator 981f3a9
+RUN     bash download.sh arcanist    3d7ac86
+RUN     bash download.sh libphutil   b4f38af
 
 # Setup apache
 RUN     a2enmod rewrite
