@@ -66,4 +66,4 @@ COPY entrypoint.sh /usr/local/bin/
 RUN ln -s usr/local/bin/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
-CMD ["/usr/sbin/php-fpm7.0"]
+CMD ["/usr/sbin/php-fpm7.0", "-F"]
