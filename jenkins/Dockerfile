@@ -14,9 +14,10 @@ FROM ubuntu:14.04
 MAINTAINER chungsub.kim@purpleworks.co.kr
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV TOMCAT_VERION=7.0.68
 
 # update ubuntu latest
-RUN echo "2015.12.20"
+RUN echo "2016.04.08"
 RUN \
   apt-get -qq update && \
   apt-get -qq -y dist-upgrade
@@ -43,8 +44,8 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 RUN \
   mkdir /app && \
   cd /app && \
-  wget -q -O - http://mirror.apache-kr.org/tomcat/tomcat-7/v7.0.67/bin/apache-tomcat-7.0.67.tar.gz | tar xfz - && \
-  ln -s apache-tomcat-7.0.67 tomcat
+  wget -q -O - http://mirror.apache-kr.org/tomcat/tomcat-7/v${TOMCAT_VERION}/bin/apache-tomcat-${TOMCAT_VERION}.tar.gz | tar xfz - && \
+  ln -s apache-tomcat-${TOMCAT_VERION} tomcat
 
 # install jenkins
 RUN \
