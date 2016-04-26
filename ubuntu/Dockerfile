@@ -10,7 +10,7 @@ MAINTAINER subicura@subicura.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN echo "20160406"
+RUN echo "20160426"
 RUN apt-get -qq update
 RUN apt-get -qq -y upgrade
 
