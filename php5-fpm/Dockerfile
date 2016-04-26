@@ -24,22 +24,8 @@ RUN apt-get -qq -y install build-essential wget && \
   		php5-pspell php5-recode php5-tidy php5-xmlrpc php5-xsl php-soap
 
 # install v8
-RUN apt-get -qq -y install php5-dev git subversion
-RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /usr/local/depot_tools
-ENV PATH $PATH:/usr/local/depot_tools
-RUN mkdir -p /tmp/src && cd /tmp/src && fetch v8 && cd v8 && git checkout ${V8_VERSION} && gclient sync && \
-    make native library=shared snapshot=off -j8 && \
-    mkdir -p /usr/lib /usr/include && \
-    cp out/native/lib.target/lib*.so /usr/lib/ && \
-    cp -R include/* /usr/include && \
-	echo "create /usr/lib/libv8_libplatform.a\naddlib out/native/obj.target/tools/gyp/libv8_libplatform.a\nsave\nend" | sudo ar -M && \
-    make clean && rm -rf /tmp/src/v8
-
-RUN git clone -b ${V8JS_VERSION} https://github.com/phpv8/v8js.git /tmp/src/v8js && \
-	cd /tmp/src/v8js && \
-	phpize && ./configure && \
-	make all install && \
-	make clean && rm -rf /tmp/src/v8js
+RUN apt-get -qq -y install php5-dev libv8-dev && \
+	pecl install v8js-0.1.3
 
 # xdebug
 RUN pear config-create ${HOME} ${HOME}/.pearrc && \
