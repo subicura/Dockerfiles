@@ -11,6 +11,7 @@ FROM subicura/ubuntu:14.04
 
 MAINTAINER subicura@subicura.com
 
+ENV XDEBUG_VERSION 2.4.0
 ENV V8_VERSION 5.1.285
 ENV V8JS_VERSION 1.2.0
 
@@ -19,7 +20,7 @@ RUN apt-get -qq -y install build-essential wget && \
 	apt-get -qq -y install software-properties-common python-software-properties && \
 	add-apt-repository ppa:ondrej/php && apt-get -qq update && \
 	apt-get -qq -y install php7.0-fpm php7.0-mysql php7.0-curl php7.0-gd php7.0-intl \
-  		php-pear php7.0-imap php7.0-mcrypt php7.0-ps \
+  		php-pear php7.0-imap php7.0-soap php7.0-mcrypt php7.0-ps \
   		php7.0-pspell php7.0-recode php7.0-tidy php7.0-xmlrpc php7.0-xsl php7.0-mbstring
 
 # install v8
@@ -43,7 +44,7 @@ RUN git clone -b ${V8JS_VERSION} https://github.com/phpv8/v8js.git /tmp/src/v8js
 # xdebug
 RUN pear config-create ${HOME} ${HOME}/.pearrc && \
 	pecl channel-update pecl.php.net && \
-	pecl install xdebug-2.4.0
+	pecl install xdebug-${XDEBUG_VERSION}
 
 # clean up
 RUN apt-get -qq -y --purge remove php7.0-dev git subversion
