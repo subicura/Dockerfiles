@@ -17,11 +17,11 @@ ENV V8JS_VERSION 1.2.0
 
 # install php5 fpm
 RUN apt-get -qq -y install build-essential wget && \
-	apt-get -qq -y install software-properties-common python-software-properties && \
-	add-apt-repository ppa:ondrej/php && apt-get -qq update && \
-	apt-get -qq -y install php5-fpm php5-mysql php5-curl php5-gd php5-intl \
-  		php-pear php5-imap php5-mcrypt php5-ps \
-  		php5-pspell php5-recode php5-tidy php5-xmlrpc php5-xsl php-soap
+	apt-get -qq -y install php-pear php-apc php5-fpm php5-mysql \
+		php5-curl php5-gd php5-intl php5-imagick \
+		php5-imap php5-mcrypt php5-memcache php5-ming php5-ps \
+		php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl && \
+	php5enmod mcrypt
 
 # install v8
 RUN apt-get -qq -y install php5-dev libv8-dev && \
