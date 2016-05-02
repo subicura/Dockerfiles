@@ -1,10 +1,10 @@
 #
-# nginx 1.9.x (http://nginx.org)
+# nginx (http://nginx.org)
 #
 # build:
-#   docker build --force-rm=true -t subicura/nginx:1.9 .
+#   docker build --force-rm=true -t subicura/nginx:1.10.0 .
 # run:
-#   docker run -p 80:80 -v /data/nginx/sites:/usr/local/nginx/conf/sites -d subicura/nginx:1.9
+#   docker run -p 80:80 -v /data/nginx/sites:/usr/local/nginx/conf/sites -d subicura/nginx:1.10.0
 # reload
 #   docker exec [container id] /usr/local/sbin/nginx -s reload
 #
@@ -13,7 +13,7 @@ FROM subicura/ubuntu:14.04
 
 MAINTAINER subicura@subicura.com
 
-ENV NGINX_VERSION 1.9.14
+ENV NGINX_VERSION 1.10.0
 ENV NGX_PAGESPEED_VERSION 1.11.33.0
 
 RUN apt-get -qq -y install build-essential wget && \
