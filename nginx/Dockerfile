@@ -2,9 +2,9 @@
 # nginx (http://nginx.org)
 #
 # build:
-#   docker build --force-rm=true -t subicura/nginx:1.10.0 .
+#   docker build --force-rm=true -t subicura/nginx:1.11.1 .
 # run:
-#   docker run -p 80:80 -v /data/nginx/sites:/usr/local/nginx/conf/sites -d subicura/nginx:1.10.0
+#   docker run -p 80:80 -v /data/nginx/sites:/usr/local/nginx/conf/sites -d subicura/nginx:1.11.1
 # reload
 #   docker exec [container id] /usr/local/sbin/nginx -s reload
 #
@@ -13,8 +13,8 @@ FROM subicura/ubuntu:14.04
 
 MAINTAINER subicura@subicura.com
 
-ENV NGINX_VERSION 1.10.0
-ENV NGX_PAGESPEED_VERSION 1.11.33.0
+ENV NGINX_VERSION 1.11.1
+ENV NGX_PAGESPEED_VERSION 1.11.33.2
 
 RUN apt-get -qq -y install build-essential wget && \
     apt-get -qq -y install libssl-dev libpcre3-dev && \
