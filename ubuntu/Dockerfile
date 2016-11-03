@@ -10,9 +10,10 @@ MAINTAINER subicura@subicura.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN echo "20160606"
-RUN apt-get -qq update
-RUN apt-get -qq -y upgrade
+RUN echo "20161103"
+RUN sed -i -e 's/archive.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get -y upgrade
 
 RUN locale-gen en_US.UTF-8  
 ENV LANG en_US.UTF-8  
