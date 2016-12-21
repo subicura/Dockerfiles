@@ -1,0 +1,17 @@
+/*!
+ * VisualEditor MediaWiki theme widget customizations.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+/* ve.ui.SurfaceWidget */
+
+.ve-ui-surfaceWidget {
+	border: 1px solid #ccc;
+}
+
+/* Context item */
+
+.ve-ui-contextItem-body {
+	min-height: 0.2em;
+}

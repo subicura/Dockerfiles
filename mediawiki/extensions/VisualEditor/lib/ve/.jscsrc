@@ -1,0 +1,6 @@
+{
+	"preset": "wikimedia",
+
+	"requireSpacesInsideParentheses": null,
+	"requireSpacesInsideArrayBrackets": null
+}

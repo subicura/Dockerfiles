@@ -1,0 +1,18 @@
+/*!
+ * VisualEditor ContentEditable CommentNode styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ce-commentNode.oo-ui-indicatorElement.oo-ui-indicatorElement-indicator {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0.2em;
+	margin: -0.25em 0.15em 0 0.15em;
+	width: 1em;
+	height: 1em;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 12px 12px;
+	opacity: 0.5;
+}

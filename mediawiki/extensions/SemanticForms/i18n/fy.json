@@ -1,0 +1,14 @@
+{
+    "@metadata": {
+        "authors": [
+            "Kening Aldgilles",
+            "Snakesteuben"
+        ]
+    },
+    "sf_createtemplate_standardformat": "Tabel",
+    "sf_createtemplate_deletefield": "Wiskje",
+    "sf_createform_inputtypedefault": "(standert)",
+    "sf_createform_add": "Tafoegje",
+    "sf_editsource": "Bewurkje boarne",
+    "sf_formedit_none": "Gjin"
+}

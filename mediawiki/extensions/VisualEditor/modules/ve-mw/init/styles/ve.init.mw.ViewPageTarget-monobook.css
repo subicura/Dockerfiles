@@ -1,0 +1,29 @@
+/*!
+ * VisualEditor MediaWiki Initialization ViewPageTarget Monobook skin high-definition styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-init-mw-viewPageTarget-toolbar {
+	margin: -0.6em -0.8em 1em -0.8em;
+	/* Correct for Monobook's x-small font on the root toolbar */
+	font-size: 1.25em;
+	line-height: 1.5em;
+}
+
+.ve-ui-overlay {
+	/* Mimic #globalWrapper */
+	font-size: 127%;
+}
+
+.ve-ui-overlay-global,
+.ve-init-mw-viewPageTarget-windowManager-welcome {
+	/* Mimic #globalWrapper + Correct for Monobook's x-small font on the root overlay */
+	font-size: 1.5875em;
+}
+
+.ve-ui-overlay-global {
+	/* So that the overlay always appears over the site logo, search box and personal tools */
+	z-index: 4;
+}

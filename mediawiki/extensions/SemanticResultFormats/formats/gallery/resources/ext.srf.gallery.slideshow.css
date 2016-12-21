@@ -1,0 +1,102 @@
+/**
+ * This file is part of the SRF gallery slideshow module
+ * @see http://www.semantic-mediawiki.org/wiki/Help:Gallery_format
+ *
+ * @section LICENSE
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * @file
+ *
+ * @since 1.8
+ * @revision 0.4
+ *
+ * @ingroup SRF
+ *
+ * @license GNU GPL v2+
+ * @author mwjames
+ * @author viljamis
+ *
+ * @ignore
+ */
+.srf-gallery-slideshow ul.gallery {
+	padding: 0px 0px 0px 0px;
+}
+
+.srf-gallery-slideshow .prev {
+	overflow: hidden;
+	padding: 0px 6px;
+}
+
+.srf-gallery-slideshow .rslides {
+	position: relative;
+	list-style: none;
+	overflow: hidden;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.srf-gallery-slideshow .rslides li {
+	position: absolute;
+	display: none;
+	width: 100%;
+	left: 0;
+	top: 0;
+}
+
+.srf-gallery-slideshow .rslides li:first-child {
+	position: relative;
+	display: block;
+	float: left;
+}
+
+/**
+ * Pager
+ * @ignore
+ */
+.srf-gallery-slideshow .rslides_tabs {
+	padding: 0;
+	margin: 1em 0;
+	clear: both;
+}
+
+.srf-gallery-slideshow ul.rslides_tabs {
+	padding: 0;
+	margin: .3em 0 0 4px;
+}
+
+.srf-gallery-slideshow .rslides_tabs li {
+	display: inline-block;
+	padding: 0 2px;
+}
+
+.srf-gallery-slideshow .rslides_tabs a {
+	background: #ddd;
+	display: inline-block;
+	height: 10px;
+	text-indent: -9999px;
+	width: 10px;
+	border-radius: 5px;
+}
+
+.ie .srf-gallery-slideshow .rslides_tabs li,
+.ie .srf-gallery-slideshow .rslides_tabs a {
+	display: block;
+	float: left;
+}
+
+.srf-gallery-slideshow .rslides_tabs .rslides_here a {
+	background: #777;
+}

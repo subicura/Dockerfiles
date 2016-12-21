@@ -1,0 +1,39 @@
+mysql:
+  restart: always
+  image: mysql
+  container_name: wiki_mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=password
+  volumes:
+    - ./docker-data/mysql:/var/lib/mysql
+wiki:
+  restart: always
+  image: subicura/mediawiki
+  container_name: wiki
+  ports:
+    - 80:80
+  links:
+    - mysql:db
+  command: /wiki_command.sh apache2-foreground
+  volumes:
+    - ./docker-data/wiki:/data
+    - ./data/composer.json:/data/composer.json
+    - ./data/composer.lock:/data/composer.lock
+    - ./data/CustomSettings.php:/data/CustomSettings.php
+    - ./data/secure.php:/data/secure.php
+    - ./data/wiki_command.sh:/wiki_command.sh
+    - ./data/mediawiki.conf:/etc/apache2/mediawiki.conf
+  environment:
+    - MEDIAWIKI_SITE_SERVER=http://wiki.company.net
+    - MEDIAWIKI_SITE_NAME=Purpleworks Wiki
+    - MEDIAWIKI_DB_HOST=db
+    - MEDIAWIKI_DB_PASSWORD=password
+
+    # This is needed so that after composer has installed the new extensions,
+    # their database changes are processed.
+    - MEDIAWIKI_UPDATE=true
+
+    # Sleep is set to ensure the db container has fully initialized before
+    # start the mediawiki container. If using an external db, remove this.
+    - MEDIAWIKI_SLEEP=10
+

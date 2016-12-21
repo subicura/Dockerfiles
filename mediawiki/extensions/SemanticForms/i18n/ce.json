@@ -1,0 +1,31 @@
+{
+    "@metadata": {
+        "authors": [
+            "Sasan700",
+            "Умар"
+        ]
+    },
+    "sf_createproperty_proptype": "Тайп:",
+    "templates": "Кепаш",
+    "sf_createtemplate_addfield": "ТӀетоха тӀеха",
+    "sf_createtemplate_deletefield": "ДӀаяккха",
+    "forms": "Форман",
+    "sf_forminputs_mandatory": "ТӀехь дерг",
+    "sf_forminputs_restricted": "Куьйгалхошна бен цатарло хӀара хийца",
+    "sf_createform_nameinput": "Форман цӀе",
+    "sf_createform_template": "Кеп:",
+    "sf_createform_inputtypedefault": "(Iад йитарца)",
+    "sf_createform_removetemplate": "ДӀаяккха кеп",
+    "sf_createform_addtemplate": "ТӀетоха кеп:",
+    "sf_createform_add": "ТӀетоха",
+    "sf_createform_hiddensection": "ХӀара язден меттиг къайлаяьккхина",
+    "sf_createform_otherparameters": "Кхин параметраш",
+    "sf_createclass_nameinput": "Форман цӀе:",
+    "sf_formstart_createoredit": "Кхолла я нисйé",
+    "formedit": "Тае форман гӀоьнца",
+    "sf_formedit_remove": "ДӀаяккха",
+    "sf_formedit_addanother": "Кхин тIетоха",
+    "sf_formedit_none": "Хlумма цаоьшу",
+    "sf_autoedit_success": "Кхиамца хийцина [[$1]] $2 форман гӀоьнца.",
+    "sf-preview-header": "Хьалха муха ю хьажар"
+}

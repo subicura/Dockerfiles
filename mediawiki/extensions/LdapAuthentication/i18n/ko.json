@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"아라"
+		]
+	},
+	"ldapauthentication-desc": "여러 LDAP 인증 방법에 대해 지원하는 LDAP 인증 플러그인"
+}

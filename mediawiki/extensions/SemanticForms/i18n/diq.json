@@ -1,0 +1,19 @@
+{
+    "@metadata": {
+        "authors": [
+            "Belekvor",
+            "Erdemaslancan",
+            "Gorizon",
+            "Mirzali"
+        ]
+    },
+    "sf_createproperty_propname": "Nameyo xısusi:",
+    "templates": "Şabloni",
+    "sf_createtemplate_deletefield": "Bestere",
+    "sf_createclass_create": "İycad ke",
+    "formedit": "Na former bıvurne",
+    "sf_formedit_remove": "Hewad",
+    "sf_formedit_none": "Çıno",
+    "sf_template_docu": "No şablonê \"$1\"yo.\nBeno ke zey formatê cêrêni name bo:",
+    "sf_template_docufooter": "Qandê Nusne na sabloner vinayışi na peler bıvurnê"
+}

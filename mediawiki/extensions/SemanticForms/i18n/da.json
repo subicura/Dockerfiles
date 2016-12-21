@@ -1,0 +1,14 @@
+{
+    "@metadata": {
+        "authors": [
+            "Jon Harald Søby"
+        ]
+    },
+    "sf_createproperty_propname": "Navn:",
+    "sf_createtemplate_standardformat": "Standard",
+    "sf_createtemplate_deletefield": "Slet",
+    "sf_createform_template": "Skabelon:",
+    "sf_createform_inputtypedefault": "(standard)",
+    "sf_createcategory_name": "Navn:",
+    "sf_formedit_none": "Ingen"
+}

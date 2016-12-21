@@ -1,0 +1,18 @@
+/*!
+ * VisualEditor MediaWiki UserInterface MWGeneralReferenceDialog styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-mwGeneralReferenceDialog-panel {
+	margin: 1em 3em;
+}
+
+.ve-ui-mwGeneralReferenceDialog-select .oo-ui-optionWidget {
+	margin: 1em 0;
+}
+
+.ve-ui-mwGeneralReferenceDialog-source-field {
+	border-bottom: 1px solid #cccccc;
+}
