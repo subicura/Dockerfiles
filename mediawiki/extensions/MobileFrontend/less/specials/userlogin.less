@@ -1,0 +1,186 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+
+// This serves no purpose on the login screen as you are not logged in so cannot use.
+#user-button {
+	display: none;
+}
+
+.stable, .beta {
+	#mw-mf-login,
+	#mw-mf-accountcreate {
+		.watermark {
+			text-align: center;
+			// FIXME: Should we set the height here?
+			height: 72px;
+			margin-bottom: @headingMargin;
+			img {
+				// Important to override default max-width and height auto combo
+				height: 72px !important;
+			}
+		}
+
+		// FIXME: Remove when mw-ui in MobileFrontend
+		.mw-ui-block {
+			display: block;
+			text-align: center;
+			padding-bottom: 12px;
+		}
+	}
+
+	#mw-mf-accountcreate {
+		.alert {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+	/* sign up form */
+	form.user-login {
+		padding-bottom: 12px;
+
+		input {
+			width: 100%;
+			display: block;
+		}
+	}
+
+	/* fancycaptcha reload button */
+	#mf-captcha-reload-container {
+		border-top: 1px dashed #e1e1e1;
+		display: inline-block;
+		padding: 14px 25%;
+
+		// FIXME: Make use of icon classes
+		.fancycaptcha-reload {
+			color: @colorGray7;
+			font-weight: bold;
+			.background-image('images/login/refresh.png');
+			background-repeat: no-repeat;
+			background-size: 24px;
+			padding: 4px 0px 4px 26px;
+		}
+	}
+}
+
+// Styles apply to alpha version of login form.
+#mw-mf-accountcreate .headmsg,
+#mw-mf-login .headmsg,
+// Styles for new login form.
+.alpha .warningbox {
+	padding: 0.5em 1em;
+	margin: 1em 0;
+}
+
+#mw-mf-accountcreate .headmsg,
+#mw-mf-login .headmsg {
+	background-color: @colorGray14;
+	border: 1px solid @colorGray12;
+	color: @grayDark;
+}
+
+.alpha {
+	.mw-ui-vform {
+		margin: auto;
+	}
+
+	.mw-form-related-link-container {
+		a {
+			padding-bottom: 12px;
+			display: block;
+		}
+	}
+}
+
+.alpha {
+	// reason for account creation is not so important on mobile - it should be obvious through the workflows
+	.mw-createacct-benefits-container {
+		display: none;
+	}
+}
+
+// The following css rules apply to beta/alpha mobile only
+// FIXME: Some of these rules should actually be mobile first, only hiding inputs needs to be wrapped in a media query
+@media all and (max-width: @wgMFDeviceWidthTablet) {
+	@margin: 12px;
+
+	.alpha {
+		#userloginForm {
+			// tips are not useful
+			.prefsectiontip,
+			// hide help link
+			#mw-userlogin-help,
+			// benefits are obvious through the workflows
+			#wpReason,
+			// real name in account creation is not so important on mobile
+			#wpRealName,
+			// Hide keep me logged in checkbox on mobile.
+			// FIXME: this should be checked by default on mobile. Use JavaScript to check this?
+			.mw-ui-checkbox {
+				display: none;
+			}
+		}
+
+		// account creation
+		#userlogin2 {
+			.loginPassword {
+				border-bottom: 0;
+			}
+
+			.mw-ui-checkbox {
+				margin: @margin 0;
+			}
+		}
+
+		.mw-ui-vform-field {
+			text-align: center;
+		}
+
+		.mw-ui-vform {
+			margin: auto;
+
+			.errorbox,
+			.successbox,
+			.warningbox {
+				padding: 1em @contentMargin;
+				margin: 0 0 1em;
+			}
+
+			.mw-ui-input {
+				padding: .8em .5em;
+				border: none;
+			}
+
+			// hide on mobile only media queries (placeholder support)
+			.mw-ui-vform-field {
+				margin-bottom: 0;
+
+				.mw-ui-button {
+					margin: @margin 0;
+				}
+
+				// user can rely on placeholder attributes in fields media query support should mean placeholder support
+				// but don't hide any checkbox labels
+				> label {
+					display: none;
+				}
+
+				// Make the inputs look connected in mobile mode
+				.mw-ui-input {
+					border: solid 1px @colorGrayLight;
+
+					#wpEmail,
+					&.loginPassword {
+						border-top-left-radius: 0;
+						border-top-right-radius: 0;
+						margin-top: -1px;
+					}
+				}
+			}
+		}
+
+		#mw-createaccount-another {
+			margin-top: @margin;
+		}
+	}
+}

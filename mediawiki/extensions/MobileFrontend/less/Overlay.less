@@ -1,0 +1,379 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+
+@contentHeaderBorderColor: #e2e2e2;
+
+
+.overlay-enabled {
+	#mw-mf-page-center {
+		overflow: hidden;
+		// FIXME: override old overlay styles, remove when old overlays gone
+		display: block;
+	}
+
+	.overlay, #mw-mf-page-center {
+		// use height instead of bottom 0 so that overlay expands when there's
+		// more content, don't use min-height because of
+		// http://stackoverflow.com/questions/3808512/the-inherited-height-of-a-child-div-from-a-parent-with-a-min-height-attribute
+		height: 100%;
+	}
+}
+
+// Overlays
+//
+// Styleguide 7.
+
+// Overlays (read only)
+//
+// TODO: Document when this should be used.
+//
+// Markup:
+// <div class="overlay-enabled">
+//   <div class="overlay visible">
+//     <div class="overlay-header-container visible">
+//       <div class="overlay-header">
+//         <ul>
+//          <li><button class="cancel icon">Close</button></li>
+//         </ul>
+//         <div class="overlay-title"><h2>Overlay</h2></div>
+//       </div>
+//     </div>
+//     <div class="content">Overlay with no icon.</div>
+//   </div>
+// </div>
+//
+// Styleguide 7.1.
+
+// Overlays (primary)
+//
+// TODO: Document when this should be used.
+//
+// Markup:
+// <div class="overlay-enabled">
+//   <div class="overlay visible">
+//     <div class="overlay-header-container visible">
+//       <div class="overlay-header">
+//         <ul>
+//          <li><button class="cancel icon">Close</button></li>
+//         </ul>
+//         <div class="overlay-title"><h2>Overlay</h2></div>
+//         <ul>
+//          <li><button class="continue icon">Continue</button></li>
+//         </ul>
+//       </div>
+//     </div>
+//     <div class="content">Overlay with progressive action.</div>
+//   </div>
+// </div>
+//
+// Styleguide 7.2.
+
+// Overlays (constructive)
+//
+// TODO: Document when this should be used.
+//
+// Markup:
+// <div class="overlay-enabled">
+//   <div class="overlay visible">
+//     <div class="overlay-header-container visible">
+//       <div class="overlay-header">
+//         <ul>
+//          <li><button class="cancel icon">Close</button></li>
+//         </ul>
+//         <div class="overlay-title"><h2>Overlay</h2></div>
+//         <div class="overlay-action"><button class="submit">Submit</button></div>
+//       </div>
+//     </div>
+//     <div class="content">Overlay with completion action.</div>
+//   </div>
+// </div>
+//
+// Styleguide 7.3.
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	z-index: @z-indexOverlay;
+	padding-top: @headerHeight;
+	display: none;
+
+	&.visible {
+		display: block;
+	}
+
+	input, textarea {
+		padding: .5em;
+	}
+
+	// FIXME: Use generic class for these input fields - can't use .panel currently due to LanguageOverlay
+	.captcha-word,
+	.summary {
+		margin: 0 0 .7em;
+		width: 100%;
+	}
+
+	.wikitext-editor {
+		min-height: 50%;
+		line-height: 1.5;
+		border: none;
+	}
+
+	.panel {
+		padding: 12px @contentMargin;
+		border-bottom: 1px solid @grayLightest;
+	}
+
+	.license {
+		font-size: .9em;
+		color: @grayMedium;
+		margin-top: .5em;
+		line-height: 1.4;
+	}
+
+	.content {
+		// AbuseFilterOverlay
+		// FIXME: Don't hijack formatting of all cancel buttons just to center some
+		.cancel {
+			display: block;
+			margin: 1em auto;
+		}
+	}
+
+	// Appears before the content providing an explanation of what follows
+	// Only used on overlays in beta (nearby pages)- may not want to push to stable
+	.content-header {
+		background: @searchBoxColorTo;
+		border-bottom: 1px solid @contentHeaderBorderColor;
+		padding: 20px @contentMargin;
+		line-height: inherit;
+	}
+
+	@buttonWidth: 40px;
+	.slider-button {
+		position: absolute;
+		top: @headerHeight;
+		width: @buttonWidth;
+		bottom: 0;
+		z-index: @z-indexOverlay;
+
+		&.prev {
+			left: 0;
+			// FIXME: Remove when mw-ui-icon in stable
+			.icon {
+				.background-image('../images/uploads/chevronLeft.png');
+				right: 0;
+			}
+		}
+
+		&.next {
+			right: 1em;
+			// FIXME: Remove when mw-ui-icon in stable
+			.icon {
+				.background-image('../images/uploads/chevronRight.png');
+				right: @buttonWidth - 32px;
+			}
+		}
+
+		// vertically align icon.
+		> * {
+			position: absolute;
+			top: 50%;
+			margin-top: -50%
+		}
+	}
+}
+
+.overlay-header {
+	display: table;
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	border-bottom: 1px solid @grayLight;
+
+	.overlay-title {
+		// Expand the title as wide as possible to limit the size of the
+		// overlay-action. (Both are displayed as table-cells.)
+		width: 100%;
+	}
+
+	.overlay-title,
+	.overlay-search {
+		padding: .15em @headerTitlePaddingH 0;
+	}
+
+	.overlay-action {
+		a,
+		button {
+			display: table-cell;
+			vertical-align: middle;
+			width: auto;
+			padding: 0 1.2em;
+			font-weight: bold;
+			// do not wrap button text
+			white-space: nowrap;
+			// links doesn't need an underline
+			text-decoration: none;
+			border-radius: 0;
+			height: @headerHeight;
+			cursor: pointer;
+			position: relative;
+
+			&:before {
+				top: 0;
+			}
+
+			&[disabled] {
+				opacity: .5;
+			}
+		}
+	}
+
+	.continue {
+		color: white;
+		background-color: @colorProgressive;
+	}
+
+	.submit {
+		color: white;
+		background-color: @colorConstructive;
+	}
+
+	h2 {
+		display: table;
+		width: 100%;
+		// FIXME: should not be necessary, scope other h2s to .content
+		font-size: @headerTitleFontSize;
+
+		> * {
+			width: 1em;
+			display: table-cell;
+			// padding instead of spaces between words
+			padding-right: .4em;
+		}
+
+		span {
+			width: auto;
+			// required for text-overflow to work
+			max-width: 1em;
+		}
+	}
+
+	> ul, > div {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	> ul {
+		li {
+			display: block;
+		}
+	}
+
+	> ul, button {
+		width: @headerHeight;
+	}
+
+	.overlay-action a,
+	button {
+		min-height: @headerHeight;
+		&:focus {
+			outline: 0;
+		}
+	}
+}
+
+.overlay-header-container,
+.overlay-footer-container {
+	width: 100%;
+	background: #fff;
+	// prevent .page-list or VE surface overlaping the header when scrolling
+	z-index: @z-indexOverOverlay;
+
+	&.position-fixed {
+		// both top and left required for Android 2 for the element to be visible
+		left: 0;
+		// the following right: 0 is converted to left: 0 for RTL languages
+		// (for unknown reasons left: 0 is mandatory in Android 2 for the
+		// element to be visible, right: 0 doesn't work)
+		right: 0;
+	}
+}
+
+.overlay-header-container {
+	top: 0;
+}
+
+.overlay-footer-container {
+	background-color: #FFF;
+	bottom: 0;
+
+	& a {
+		display: block;
+		// The 1em bottom whitespace is applied as padding since Chrome and Safari ignore
+		// it otherwise. The 10px padding corresponds with the icon margin.
+		padding: 1em 1em 1em 10px;
+		border-top: 1px solid @grayLight;
+		text-align: center;
+	}
+}
+
+// Bottom Overlays
+//
+// A overlay that is docked to the bottom of the screen.
+// All types of overlays (progressive and constructive) apply here.
+//
+// Markup:
+// <div class="overlay overlay-bottom position-fixed visible">
+//   <div class="overlay-header-container visible">
+//     <div class="overlay-header">
+//       <ul>
+//        <li><button class="cancel icon">Close</button></li>
+//       </ul>
+//       <div class="overlay-title"><h2>Overlay</h2></div>
+//       <ul>
+//        <li><button class="submit icon">Submit</button></li>
+//       </ul>
+//     </div>
+//   </div>
+//   <div class="content"></div>
+// </div>
+//
+// Styleguide 7.4.
+.overlay-bottom {
+	border-top: 1px solid @grayLight;
+	top: auto;
+	bottom: 0;
+	height: auto !important;
+	background: @colorGray15;
+
+	.overlay-header-container {
+		background: @colorGray15;
+	}
+}
+
+.overlay-ios {
+	.overlay-header-container {
+		position: absolute !important;
+	}
+
+	.overlay-footer-container {
+		position: absolute !important;
+	}
+
+	.overlay-content {
+		// has to be scroll, not auto
+		overflow-y: scroll;
+		// smoother scrolling (with momentum) on iOS
+		-webkit-overflow-scrolling: touch;
+	}
+}
+
+@media all and (min-width: @wgMFDeviceWidthTablet) {
+	.overlay {
+		.panel {
+			padding: 12px @contentPaddingTablet;
+		}
+	}
+}

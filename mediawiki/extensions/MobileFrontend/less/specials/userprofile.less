@@ -1,0 +1,91 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+
+
+@cardMargin: @contentMargin / 2;
+@captionPadding: 8px;
+
+// FIXME: Refactor our CSS for errors - 1 class for the text, 1 for the block
+.error {
+	padding: 1em;
+}
+
+.profile {
+	margin: 1em 0 0 0;
+	color: @grayMedium;
+
+	a {
+		color: @grayMediumDark;
+		font-weight: bold;
+	}
+
+	// TODO: make centering work
+	.card-container,
+	.footer {
+		font-size: 0.9em;
+	}
+
+	h2 {
+		color: @grayLight;
+		text-transform: uppercase;
+	}
+
+	.card-container {
+		text-align: center;
+		padding: 1px;
+	}
+
+	.card {
+		max-width: @wgMFDeviceWidthTablet;
+		background: #fff;
+		color: @grayMediumDark;
+		border: solid 1px @grayLight;
+		margin: 0 @cardMargin @cardMargin;
+		text-align: left;
+
+		.caption {
+			width: 66%;
+			vertical-align: top;
+			padding: @captionPadding;
+		}
+	}
+
+	.footer {
+		text-align: center;
+		color: @grayMediumDark;
+		clear: both;
+		padding: 2em 0 0;
+
+		.icon-talk,
+		// FIXME: Remove above selector when mw-ui-icon in stable
+		.mw-ui-icon {
+			margin-top: 1.5em;
+		}
+
+		// FIXME: Remove when mw-ui-icon in stable
+		.icon-talk {
+			padding-left: 40px;
+			background-position: left 10px center;
+		}
+	}
+}
+
+// Tablet styling
+@media all and (min-width: @wgMFDeviceWidthTablet) {
+	.profile {
+		margin: 0 auto;
+		.card {
+			margin: @cardMargin auto;
+			min-height: @wgMFThumbnailSmall;
+
+			.list-thumb {
+
+				&.list-thumb-placeholder {
+					// FIXME: Make this a generic responsive class in icons.less
+					.background-size( 64px, auto );
+					min-height: @wgMFThumbnailSmall;
+				}
+			}
+		}
+	}
+}

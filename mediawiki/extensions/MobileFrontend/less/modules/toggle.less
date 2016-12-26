@@ -1,0 +1,51 @@
+/* Styling of sections and toggling
+moved from beta_common.css in
+Change-Id: I683d029d09340a460b02016c5c4fbd6ada5a9b35
+*/
+@import "minerva.variables";
+@import "minerva.mixins";
+
+.client-js {
+	.collapsible-heading,
+	.collapsible-block {
+		clear: both;
+	}
+
+	.collapsible-heading {
+		cursor: pointer;
+		position: relative;
+
+		border-bottom: solid 1px @sectionBorderColor;
+
+		.indicator {
+			float: left;
+			// FIXME: We should either remove this or use a more generic selector
+			&.mw-ui-icon {
+				margin-top: .7em;
+				font-size: .4em;
+			}
+		}
+	}
+
+	.section-heading {
+		padding-right: @sectionIconWidth + 15px;
+
+		.icon {
+			margin-right: 12px;
+		}
+	}
+
+	.section-heading {
+		margin-bottom: @headingMargin;
+	}
+
+	.collapsible-block {
+		// bug 41401 - without this content doesn't always take up whole width
+		width: 100%;
+		display: none;
+
+		&.open-block {
+			display: block;
+		}
+	}
+}

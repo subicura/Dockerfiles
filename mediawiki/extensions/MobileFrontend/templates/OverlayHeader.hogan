@@ -1,0 +1,15 @@
+<ul>
+	<li>{{{cancelButton}}}</li>
+</ul>
+<div class="overlay-title">
+	<h2>{{{heading}}}</h2>
+</div>
+{{#headerButtons}}
+<div class="{{headerButtonsListClassName}}">
+	{{#headerButtons}}
+	{{^href}}<button{{/href}}
+	{{#href}}<a href="{{href}}"{{/href}}
+		class="{{className}}">{{msg}}{{^href}}</button>{{/href}}{{#href}}</a>{{/href}}
+	{{/headerButtons}}
+</div>
+{{/headerButtons}}

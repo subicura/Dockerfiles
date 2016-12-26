@@ -1,0 +1,74 @@
+	@import "minerva.variables";
+@import "minerva.mixins";
+
+.overlay.media-viewer {
+	background: #000;
+	padding-top: 0;
+
+	.main {
+		height: 100%;
+		position: relative;
+		width: 100%;
+	}
+
+	.image-wrapper {
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		display: table;
+
+		.image {
+			display: table-cell;
+			vertical-align: middle;
+			height: 100%;
+			width: 100%;
+		}
+	}
+
+	img {
+		// get rid of a small bottom margin and vertical scrollbar
+		vertical-align: bottom;
+		// for images with transparent background
+		background: #fff;
+
+		&.ratio-width {
+			width: 100%;
+		}
+
+		&.ratio-height {
+			height: 100%;
+		}
+	}
+
+	// FIXME: change styling after overlay overhaul
+	.cancel {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		opacity: .75;
+	}
+
+	// FIXME: Merge with overlay-footer-container
+	.details {
+		z-index: @z-indexOverOverlay;
+		bottom: 0;
+		height: auto;
+		position: fixed;
+		width: 100%;
+		padding: 8px 10px;
+		margin: 0;
+		background: white;
+		overflow-y: auto;
+
+		.button {
+			float: right;
+		}
+	}
+}
+
+.animations .media-viewer {
+	.details {
+		.transition( opacity .5s );
+	}
+}
+

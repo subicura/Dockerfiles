@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Enable this pre-commit hook by running 'make installhooks'
+
+# check for trailing whitespace
+if [[ `git diff --cached --check` ]]; then
+	git diff --cached --check
+	exit 1
+fi
+
+make jshint || exit 1
+make jscs || exit 1
+
+if git diff --name-only --cached | grep --regexp '\.js$' ; then
+	make qunit || exit 1
+fi
+
+if git diff --name-only --cached | grep --regexp '\.*php$' ; then
+	make phplint || exit 1
+fi
+
+if git diff --name-only --cached | grep --regexp 'includes/skins/.*php$' ; then
+	make validatehtml > $result
+fi
+
+for file in `git diff --cached --name-only | grep -i ".png\$"`
+do
+	echo "Compressing $file"
+	if [ -f $file ]; then
+		optipng -q -o7 "$file" && advpng -z -4 "$file" && advdef -z -4 "$file" | grep "Output"
+		git add "$file"
+	else
+		echo 'file was removed'
+	fi
+done
+
+for file in `git diff --cached --name-only | grep -i ".svg\$"`
+do
+	make nodecheck
+	echo "Compressing $file"
+	if [ -f $file ]; then
+		# If anyone can figure out how to get the pretty option to work from the config
+		# file, feel free to remove it here.
+		node_modules/.bin/svgo --config=.svgo.yml "$file" --pretty
+		git add "$file"
+	else
+		echo 'file was removed'
+	fi
+done

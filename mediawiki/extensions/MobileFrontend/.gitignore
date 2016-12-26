@@ -1,0 +1,16 @@
+.svn
+*~
+*.kate-swp
+.*.swp
+.idea/
+/composer.phar
+/vendor/
+node_modules/
+tmp/
+docs/
+dev-scripts/remotes
+vendor/
+composer.phar
+.DS_Store
+composer.lock
+tests/report

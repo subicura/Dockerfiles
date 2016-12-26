@@ -1,0 +1,23 @@
+<div class="overlay-header-container position-fixed">
+	{{>editHeader}}
+	{{>previewHeader}}
+	{{>saveHeader}}
+</div>
+
+<div class="overlay-content">
+	<div class="panels">
+		<div class="save-panel panel hideable hidden">
+			<p class="summary-request">{{{summaryRequestMsg}}}</p>
+			<textarea rows="2" class="mw-ui-input summary" placeholder="{{summaryMsg}}"></textarea>
+			{{#licenseMsg}}<p class="license">{{{licenseMsg}}}</p>{{/licenseMsg}}
+		</div>
+		<div class="captcha-panel panel hideable hidden">
+			<div class="captcha-box">
+				<img src="">
+				<input class="captcha-word mw-ui-input" placeholder="{{captchaMsg}}" />
+			</div>
+		</div>
+	</div>
+	{{{spinner}}}
+	{{>content}}
+</div>

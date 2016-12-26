@@ -1,0 +1,107 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+
+@toastNotificationColor: #373737;
+
+// Toast notifications
+//
+// Styleguide 3.
+
+.drawer {
+	// needed for Android 4.x
+	position: absolute;
+	// needed for MSIE 9 (Windows Phone 7)
+	width: 100%;
+}
+
+// Basic toast notification
+//
+// Toast must have visible class to be shown
+//
+// Markup:
+// <div class="toast visible">
+//  Notification for user.
+// </div>
+//
+// Styleguide 3.1.
+.toast,
+.drawer {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: @searchBoxColorTo;
+	box-shadow: 0 -1px 8px 0 rgba(0, 0, 0, 0.35);
+	word-wrap: break-word;
+	// needs to be higher than for overlays to show on top of overlays
+	z-index: @z-indexOverOverlay;
+	// don't use visibility: hidden in old browsers that don't support animations
+	display: none;
+
+	&.visible {
+		display: block;
+	}
+}
+
+.animations {
+	.toast,
+	.drawer {
+		@duration: .25s;
+		display: block;
+		visibility: hidden;
+		/* we can't determine the actual size of the drawer in CSS, so this is
+		 * an estimate; it doesn't have to be exact because it's used only for
+		 * the sliding animation, not for hiding the drawer */
+		.transform( translate3d(0, 100px, 0) );
+		// counter translate3d with bottom to avoid empty blank space at the bottom
+		// especially on browsers that don't support position: fixed
+		bottom: 100px;
+		opacity: 0;
+		// delay visibility transition to make other transitions visible
+		// http://fvsch.com/code/transition-fade/test5.html
+		// need to assign to a temporary variable to preserve commas
+		// https://github.com/leafo/lessphp/issues/105#issuecomment-2872598
+		@transition: @duration, opacity @duration, visibility 0s @duration, bottom 0s @duration;
+		.transition-transform( @transition );
+
+		&.visible {
+			bottom: 0;
+			// need to assign to a temporary variable to preserve commas
+			// https://github.com/leafo/lessphp/issues/105#issuecomment-2872598
+			@transition: @duration, opacity @duration;
+			.transition-transform( @transition );
+			visibility: visible;
+			opacity: 1;
+			.transform( translate3d(0, 0, 0) );
+		}
+	}
+}
+
+.toast {
+	font-size: .9em;
+	padding: .9em 1em;
+	background-color: @toastNotificationColor;
+	color: #fff;
+	margin: 0 10% 20px;
+	width: 80%;
+	text-align: center;
+	border-radius: 3px;
+
+	// Toast notification error state
+	//
+	// When the toast message needs to convey that an error has occurred add the error class
+	//
+	// Markup:
+	// <div class="toast visible error">
+	//  An error occurred.
+	// </div>
+	//
+	// Styleguide 3.2.
+	&.error {
+		.background-image('images/error.png');
+		background-position: 16px 50%;
+		background-repeat: no-repeat;
+		padding-left: 5%;
+		width: 75%;
+		border: none; // FIXME: this is needed because a global .error adds border
+	}
+}

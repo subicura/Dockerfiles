@@ -1,0 +1,11 @@
+<h2>{{{tocIcon}}}<span>{{contentsMsg}}</span></h2>
+<div>
+	<ul>
+	{{#sections}}
+	{{>tocHeading}}
+	{{/sections}}
+	</ul>
+</div>
+
+
+

@@ -1,0 +1,379 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+@import "mediawiki.mixins";
+
+// FIXME: Separate imported folders into a components directory
+@import 'mainmenu';
+
+@topBarBackgroundColor: #F3F3F3;
+
+html,
+body {
+	// Ensure overlays take up full screen
+	height: 100%;
+}
+
+#content_wrapper {
+	.last-modified-bar {
+		background-color: @colorGray14;
+		padding: 5px @contentMargin;
+		display: block;
+		color: @colorGray6;
+		a {
+			color: @colorGray6;
+			// If browser supports
+			&:nth-child(2) {
+				font-weight: bold;
+			}
+		}
+
+		&.active {
+			background-color: #00AF8B;
+			color: #fff;
+			a {
+				color: #fff;
+			}
+		}
+	}
+}
+
+.header {
+	display: table;
+	width: 100%;
+	height: @headerHeight;
+	white-space: nowrap;
+	border-bottom: 1px solid @grayLight;
+
+	> a {
+		width: @headerHeight;
+	}
+
+	// Left and right menu links
+	> a,
+	// Search field
+	> form,
+	// Spinner
+	> div {
+		vertical-align: middle;
+		display: table-cell;
+	}
+
+	// Search
+	> form {
+		padding: .15em @headerTitlePaddingH 0;
+		width: auto;
+		vertical-align: middle;
+	}
+
+	> .header-title {
+		vertical-align: middle;
+	}
+
+	.fulltext-search {
+		margin: 0 3px 0 9px;
+	}
+}
+
+// Make search input more visible for users on small screens.
+// Opera Mini doesn't support placeholders.
+@media all and (max-width: @wgMFDeviceWidthMobileSmall) {
+	.header {
+		.search {
+			border: 1px solid @grayLight;
+			padding: .3em .1em;
+		}
+	}
+}
+
+// Add border between notices and header
+.mw-dismissable-notice {
+	border-bottom: 1px solid @grayLight;
+}
+
+// Used for messages on login screen, page lists and uploads and when showing old revisions
+.warningbox,
+.alert.warning {
+	color: @colorWarningText;
+	background: @colorWarningBackground;
+}
+
+.alert {
+	padding: 1em @contentMargin;
+	margin: 0 0 1em;
+
+	&.successbox {
+		background: @colorSuccessBackground;
+	}
+
+	h2 {
+		font: bold 100% @fontFamily;
+		padding: 0;
+		margin: 0 0 .5em 0;
+	}
+
+	// used e.g. in EditorOverlay
+	a {
+		margin-bottom: 1em;
+	}
+}
+
+/* Search */
+
+.client-use-basic-search,
+.client-nojs {
+	.header {
+		.search,
+		.fulltext-search {
+			display: block;
+			float: left;
+		}
+
+		.search {
+			// Assume the smallest possible screen size.
+			// We want people to be able to search we don't care if it looks pretty.
+			width: 80px;
+			margin-right: 8px;
+		}
+	}
+}
+
+input.search {
+	outline: 0;
+	width: 100%;
+	// FIXME: unable to check but the important may not be needed for Nokia S60;
+	background-color: #fff !important; /* remove fennec default background also see bug 36490 */
+	// get rid of rounded corners in Safari
+	-webkit-appearance: none;
+	// get rid of X in Chrome
+	&::-webkit-search-cancel-button {
+		-webkit-appearance: none;
+	}
+}
+
+// FIXME: remove when micro.tap in stable and rule from common-js.less too
+.search-box {
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+.content {
+	// Correct icon sizes of edit icon when using mw-ui-icon.
+	h1 {
+		// FIXME: Make less specific when mw-ui-icon default.
+		.mw-ui-icon.edit-page {
+			font-size: 1 / @fontSizeH1;
+		}
+	}
+
+	h2 {
+		.mw-ui-icon.edit-page {
+			font-size: 1 / @fontSizeH2;
+		}
+	}
+
+	h3 {
+		.mw-ui-icon.edit-page {
+			font-size: 1 / @fontSizeH3;
+		}
+	}
+
+	.edit-page {
+		display: none;
+		top: 0;
+		bottom: 0;
+		right: 0;
+	}
+
+	// edit pencils for section headings (collapsible)
+	.collapsible-heading {
+		.edit-page {
+			position: absolute;
+		}
+	}
+
+	// show edit section pencils on section headings inside collapsible blocks
+	.in-block {
+		position: relative;
+
+		> .edit-page {
+			display: none;
+			// edit pencils for inline/sub-section headings - bug T90245
+			position: relative;
+			float: right;
+		}
+	}
+
+	.open-block {
+		// Restrict to child so that child section edit links do not get revealed.
+		> .edit-page {
+			display: block;
+		}
+	}
+}
+
+.stub .edit-page {
+	margin: 0;
+	display: block;
+}
+
+.stable {
+	// Remove when/if page-secondary-actions are promoted to stable
+	.languageSelector {
+		margin-top: 1em;
+	}
+}
+
+#page-secondary-actions {
+	a {
+		margin: 10px 2px 2px 0;
+	}
+}
+.truncated-text {
+	white-space: nowrap;
+	overflow: hidden;
+	-webkit-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+
+	// FIXME: this works only in WebKit
+	&.multi-line {
+		white-space: normal;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+	}
+
+	&.two-line {
+		-webkit-line-clamp: 2;
+		// fallback for non-WebKit
+		max-height: 2.6em;
+	}
+}
+
+// FIXME: Create generic class to represent both of these headers
+.overlay,
+.header {
+
+	// need to specify id or else other rules are more important
+	// FIXME: simplify when .icon class from Overlay used instead
+	#secondary-button.user-button,
+	.user-button {
+		// Make sure count is positioned correctly in relation to bell icon
+		position: relative;
+
+		// can't use display:none class as icons must have a label to retain height
+		.label {
+			visibility: hidden;
+		}
+
+		// FIXME: Remove when cache is cleared.
+		&.icon {
+			width: @headerHeight;
+			text-align: right;
+			.background-image-svg-quick( 'images/bell' );
+			// Fixes positioning in Firefox
+			display: inline-block;
+			float: right;
+			// FIXME: This shouldn't be needed
+			height: @headerHeight;
+		}
+
+		&.loading span {
+			display: none;
+		}
+	}
+}
+
+.notification-count {
+	text-indent: 0;
+	display: inline-block;
+	font-weight: bold;
+	color: #fff;
+	background: #c91f2c;
+	border-radius: 2px;
+	height: 1.2em;
+	line-height: 1.2em;
+	min-width: 1em;
+	margin: .6em .6em 0 0;
+	padding: 0 0.1em;
+	text-align: center;
+
+	&.zero {
+		display: none;
+	}
+
+	// FIXME: There must be a better way of doing this
+	&.max {
+		right: .2em;
+		width: 2em;
+		height: 2em;
+		line-height: 2em;
+		font-size: 0.7em;
+	}
+}
+
+// FIXME [mediawiki ui] These rules should not be needed in the mobile context
+.mw-ui-button-group {
+	text-align: center;
+
+	* {
+		float: none !important;
+	}
+
+	// For talk and CTA drawer
+	.mw-ui-block {
+		width: auto;
+	}
+}
+
+// Move to a separate file if beta styling gets considerably large
+.beta {
+	// FIXME: Remove when mw-ui-icon is in beta
+	.mw-ui-button.icon-talk {
+		background-position: left 10px center;
+		padding-left: 50px;
+	}
+}
+
+// FIXME: identify why this is here.
+.alpha {
+	.notification-count {
+		position: absolute;
+		right: 0;
+		top: -.1em;
+	}
+
+	.spinner {
+		margin: auto;
+	}
+}
+
+.alpha {
+	.header {
+		background-color: #fff;
+		position: relative;
+
+		> .header-title {
+			// align the text in the middle regardless of whether the notification icon exists or not
+			bottom: 0;
+			left: @headerHeight;
+			position: absolute;
+			right: @headerHeight;
+			text-align: center;
+			top: 0;
+			a {
+				display: block;
+				line-height: @headerHeight;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+.alpha,
+.beta {
+	#page-secondary-actions {
+		&:before {
+			content: "";
+			display: block;
+			clear: both;
+		}
+	}
+}

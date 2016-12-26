@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"RMizo"
+		]
+	},
+	"mobile-frontend-back-to-top-of-section": "Hlawm khat zuan lêtna",
+	"mobile-frontend-clear-search": "Nawhrehna",
+	"mobile-frontend-desc": "Biakhlatna hmanga thlìrna",
+	"mobile-frontend-dismiss-notification": "he hriattirna hi hnâwl rawh",
+	"mobile-frontend-featured-article": "Tlangrèlthang...",
+	"mobile-frontend-footer-contact": "Biakna",
+	"mobile-frontend-footer-sitename": "{{SITENAME}}",
+	"mobile-frontend-home-button": "Inpui",
+	"mobile-frontend-login": "Luhna",
+	"mobile-frontend-main-menu-featured": "Tlángrèlthang",
+	"mobile-frontend-news-items": "Chanchin thar",
+	"mobile-frontend-password": "Thurûk:",
+	"mobile-frontend-placeholder": "I zawn duh hetah hian ziak rawh le. . .",
+	"mobile-frontend-privacy-link-text": "Inthupna",
+	"mobile-frontend-random-button": "Kahpah",
+	"mobile-frontend-regular-site": "Hmaipui thlir",
+	"mobile-frontend-search-submit": "Khai le",
+	"mobile-frontend-username": "Hmangtuhming:",
+	"mobile-frontend-view": "Biakhlatna hmanga thlìrna",
+	"mobile-frontend-view-desktop": "Khawlthluaknei",
+	"mobile-frontend-view-mobile": "Biakhlatna"
+}

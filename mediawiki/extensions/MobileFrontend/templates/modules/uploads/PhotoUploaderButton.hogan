@@ -1,0 +1,2 @@
+{{buttonCaption}}
+<input name="file" type="file" class="cloaked-element">

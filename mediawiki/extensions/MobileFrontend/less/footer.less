@@ -1,0 +1,56 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+
+/* FOOTER
+initially moved from beta_common.css in
+Change-Id: I48bcdc43e72f2a9b60e6d1bfe877d79ad80b6d5d
+*/
+
+#footer {
+	padding: 2em @contentMargin 1.5em @contentMargin;
+	margin: 2em auto 0 auto;
+	border-top: 1px solid @colorGray10;
+	font-size: 0.9em;
+	clear: both;
+
+	h2 {
+		display: inline;
+		font-weight: bold;
+		font-size: 1em;
+
+		img {
+			height: 1em;
+		}
+	}
+
+	ul {
+		text-align: center;
+
+		li {
+			line-height: 1.2;
+			padding: 0 0 .7em;
+		}
+
+		ul {
+			display: inline
+		}
+
+		ul li,
+		&.footer-places li {
+			display: inline;
+			padding: 0 8px;
+			border-right: 1px solid @colorGray10;
+
+			// A hack to avoid connecting letters in cursive scripts such as Arabic.
+			// See https://phabricator.wikimedia.org/T86281
+			&:after {
+				content: ' ';
+				font-size: 0;
+			}
+
+			&:last-child {
+				border: none;
+			}
+		}
+	}
+}

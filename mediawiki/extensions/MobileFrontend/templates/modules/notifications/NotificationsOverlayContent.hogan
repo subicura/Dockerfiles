@@ -1,0 +1,9 @@
+{{{spinner}}}
+{{#errorMessage}}<div class="content">{{errorMessage}}</div>{{/errorMessage}}
+<ul class="mw-mf-notifications">
+	{{#notifications}}
+		<li class="mw-echo-notification">
+			{{{message}}}
+		</li>
+	{{/notifications}}
+</ul>

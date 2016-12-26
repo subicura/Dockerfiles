@@ -1,0 +1,18 @@
+<div class="overlay-header initial-header hideable hidden">
+	<ul>
+		<li>{{{backButton}}}</li>
+	</ul>
+	{{^hasToolbar}}
+	<div class="overlay-title">
+		<h2>{{{editingMsg}}}</h2>
+	</div>
+	{{/hasToolbar}}
+	{{#hasToolbar}}<div class="toolbar"></div>{{/hasToolbar}}
+	{{#editSwitcher}}
+		<div class="switcher-container">
+		</div>
+	{{/editSwitcher}}
+	{{^readOnly}}
+	<div class="overlay-action"><button class="continue" disabled>{{continueMsg}}</button></div>
+	{{/readOnly}}
+</div>

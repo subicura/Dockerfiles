@@ -1,0 +1,45 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+
+// Content formatting and typography
+//
+// Our content is predominately text, hence visual hierarchy must be clear.
+//
+// Styleguide 1.
+
+html {
+	// prevent font scaling in landscape in Safari
+	-webkit-text-size-adjust: none;
+	font-size: 100% * @fontScalingFactor;
+}
+
+@bodyLineHeight: 1.4;
+
+body {
+	font-family: @fontFamily;
+	line-height: @bodyLineHeight;
+	color: @grayDark;
+	background: #fff;
+}
+
+.content {
+	line-height: @contentLineHeight;
+	margin: .8em @contentMargin 0;
+	// Deal with long links (bug 60387)
+	word-wrap: break-word;
+}
+
+@media all and (max-width: @wgMFDeviceWidthMobileSmall) {
+	body {
+		font-size: .8em;
+	}
+
+	.content {
+		margin: 0 12px;
+	}
+}
+
+.nomobile {
+	// No mobile should trump any other class. e.g. .content table { display: table; }
+	display: none !important;
+}

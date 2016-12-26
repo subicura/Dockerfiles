@@ -1,0 +1,11 @@
+{{#error}}
+<div class="alert error">
+	{{#heading}}<h2>{{heading}}</h2>{{/heading}}
+	<p>{{guidance}}</p>
+</div>
+{{/error}}
+<ul class="page-list thumbs actionable">
+	{{#pages}}
+		{{>item}}
+	{{/pages}}
+</ul>

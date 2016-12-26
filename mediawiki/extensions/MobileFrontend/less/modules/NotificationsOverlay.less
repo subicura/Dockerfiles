@@ -1,0 +1,87 @@
+// FIXME: some of this could be removed if we reused .page-list styling
+@import "minerva.variables";
+@import "minerva.mixins";
+
+.notifications-overlay {
+	// position: fixed + sliding drawer causes weird rendering bugs in Android
+	// Browser (tested on 4.0.4 and 4.2.1)
+	padding-top: 0;
+
+	.overlay-header-container {
+		position: static !important;
+	}
+
+	.overlay-content {
+		// this is needed not only on iOS, that's why we repeat it here even though
+		// it's in Overlay.less too
+		overflow-y: scroll; // has to be scroll, not auto
+		position: absolute;
+		top: @headerHeight;
+		bottom: @headerHeight;
+		width: 100%;
+		margin-top: 1px;
+	}
+
+	.mw-echo-icon {
+		width: 30px;
+		height: 30px;
+		float: left;
+		margin: 0 10px 0 0;
+	}
+
+	.mw-echo-content {
+		margin-left: 40px;
+		font-size: .9em;
+		line-height: 1.4;
+	}
+
+	.mw-echo-notification-footer {
+		margin-top: .6em;
+		font-size: .9em;
+	}
+
+	.mw-echo-notification-primary-link {
+		display: none;
+	}
+
+	.mw-echo-notification {
+		padding: 1.2em 1em 1em;
+		border-bottom: 1px solid @colorGray14;
+		// FIXME: ARgghghghg more grays - think of the children!
+		background: #F8F8F8;
+
+		&:hover {
+			// FIXME: Yet another gray..
+			background-color: @colorGray15;
+		}
+	}
+
+	.mw-echo-linked-notification {
+		cursor: pointer;
+	}
+
+	.mw-echo-title {
+		font-size: 1em;
+		line-height: 1.4;
+	}
+
+	.mw-echo-payload {
+		margin-top: .4em
+	}
+
+	.user-button {
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding-right: 0;
+		z-index: @z-indexOverOverlay;
+	}
+}
+
+@media all and (min-width: @wgMFDeviceWidthTablet) {
+	.notifications-overlay {
+		.mw-echo-notification {
+			padding: 1.75em @contentPaddingTablet;
+		}
+	}
+}

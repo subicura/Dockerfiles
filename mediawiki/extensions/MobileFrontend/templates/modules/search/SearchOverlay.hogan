@@ -1,0 +1,23 @@
+<div class="overlay-header-container position-fixed">
+	<div class="overlay-header">
+		{{{cancelButton}}}
+		<form method="get" action="{{action}}" class="search-box">
+			<input class="search" type="search" name="search" autocomplete="off" placeholder="{{placeholderMsg}}" value="{{searchTerm}}">
+		</form>
+		{{{clearIcon}}}
+	</div>
+</div>
+<div class="overlay-content">
+	<div class="search-content overlay-header">
+		<ul>
+			<li><button class="icon">{{searchContentMsg}}</button></li>
+		</ul>
+		<div class="caption">
+			<p class="with-results">{{searchContentMsg}}</p>
+			<p class="without-results">{{noResultsMsg}}</p>
+			<p class="without-results">{{{searchContentNoResultsMsg}}}</p>
+		</div>
+	</div>
+	{{{spinner}}}
+	<div class="results"></div>
+</div>

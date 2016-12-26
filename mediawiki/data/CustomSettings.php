@@ -82,4 +82,9 @@ $wgLDAPLowerCaseUsername = array(
   'openldap' => true,
 );
 $wgLDAPUseLDAPGroups = array( "openldap"=>true );
+
+/**** MobileFrontend */
+require_once("$IP/extensions/MobileFrontend/MobileFrontend.php");
+$wgMFAutodetectMobileView = true;
+
 include('/data/secure.php');

@@ -1,0 +1,75 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+
+// no fallback mixin for those SVGs (VE doesn't work on browsers without SVG
+// support anyway)
+// FIXME: Remove when mw-ui-icon in stable
+.icon.icon-edit-source {
+	.background-image( 'images/editSourceNormal.svg' );
+}
+
+// FIXME: Remove when mw-ui-icon in stable
+.icon.icon-edit-ve {
+	.background-image( 'images/editVeNormal.svg' );
+}
+
+.editor-overlay {
+	.preview {
+		display: none;
+	}
+
+	.wikitext-editor {
+		padding: 10px @contentMargin;
+	}
+
+	.summary-request {
+		font-size: 1.4em;
+		font-weight: bold;
+		margin: .5em 0;
+		color: @grayMediumDark;
+	}
+
+	.buttonBar {
+		.message {
+			margin: 0 0 .7em;
+			padding: 0 0 .3em;
+			border-bottom: 1px solid @colorGray12;
+			color: @infoColor;
+
+			p {
+				display: inline-block;
+				text-align: center;
+				padding-top: 0;
+			}
+		}
+	}
+
+	.overlay-header {
+		.oo-ui-toolbar-bar {
+			border-bottom: none;
+		}
+		.oo-ui-icon-editor-switcher {
+			.background-image( 'images/editToggle.svg' );
+		}
+		.oo-ui-icon-edit-source {
+			.background-image( 'images/editSourceNormal.svg' );
+		}
+		.oo-ui-icon-edit-ve {
+			.background-image( 'images/editVeNormal.svg' );
+		}
+	}
+}
+
+.abusefilter-overlay {
+	// FIXME: enwiki only?
+	.mbox-image {
+		min-width: 30px;
+	}
+}
+
+// FIXME: high line-height (1.5) causes weird behavior in textareas on
+// Android 2.x, remove this if we don't want to support editor there
+.android2.editor-overlay textarea {
+	line-height: 1.2;
+}
+

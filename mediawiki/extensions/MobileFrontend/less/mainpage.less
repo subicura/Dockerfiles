@@ -1,0 +1,30 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+
+.page-Main_Page {
+	#section_0 {
+		border: none;
+	}
+
+	#page-actions,
+	.pre-content {
+		display: none;
+	}
+
+	&.is-authenticated {
+		.pre-content {
+			display: block;
+		}
+	}
+
+	.page-banner {
+		margin: 0 @contentMargin @contentMargin;
+		border: solid 1px @grayLightest;
+		li {
+			border: none;
+		}
+		.button {
+			font-weight: bold;
+		}
+	}
+}

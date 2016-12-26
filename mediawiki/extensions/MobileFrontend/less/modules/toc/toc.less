@@ -1,0 +1,105 @@
+@import "minerva.mixins";
+@import "minerva.variables";
+
+@paddingHorizontal: 24px;
+@iconSize: 16px;
+@iconHeadingGap: 12px;
+@paddingVertical: 1.4em;
+@fontSize: .8em;
+
+// FIXME:  Remove when new icons used in stable
+.icon-toc {
+	.background-image-svg-quick('images/contents-ltr');
+}
+
+.stable {
+	.toc-mobile {
+		.collapsible-heading {
+			line-height: 1.4;
+		}
+	}
+}
+
+.client-js .toc-mobile {
+	position: relative;
+	// FIXME: Use predefined colors?
+	background-color: @colorGray15;
+	border: solid 1px @grayLightest;
+	font-size: 1.3em;
+	float: left;
+	clear: left;
+	margin: 1em 0;
+
+	.toc-button {
+		float: left;
+		display: block;
+
+		// promote to parent class when in stable
+		&.mw-ui-icon {
+			font-size: @fontSize;
+		}
+	}
+
+	.collapsible-heading {
+		font-family: @fontFamily;
+		font-size: @fontSize;
+		background-position: right center;
+		font-weight: bold;
+		padding: @paddingVertical / 2 0;
+		border-bottom: none;
+		&.icon {
+			// add right padding to the chevron without reducing tapable area
+			border-right: @paddingHorizontal solid transparent;
+		}
+
+		// Override rules for section toggler
+		// In table of contents the collapsing caret is on the right
+		.indicator {
+			margin: .2em .4em 0 0;
+			float: right;
+			font-size: .6em;
+		}
+	}
+
+	.collapsible-block {
+		// Override default toggle styles
+		border-bottom: none;
+		margin-left: @paddingHorizontal + @iconSize + @iconHeadingGap;
+		margin-right: @paddingHorizontal;
+		font-size: (7 * @fontSize) / 8;
+		width: auto;
+		> ul {
+			padding-bottom: @fontSize + @headingMargin;
+		}
+
+		ul {
+			// FIXME: Shouldn't have to do this. Add another class to normal sections to distinguish them from this content_block
+			list-style: none;
+			// Account for border at bottom of heading
+			margin-bottom: 1px;
+
+			li {
+				padding-top: @fontSize;
+				// This ensures when a heading spills to a second line it can be distinguished from other headings
+				a {
+					white-space: pre-wrap;
+				}
+				line-height: 1.2;
+			}
+		}
+	}
+}
+
+// FIXME: remove rule when mw-ui-icon in stable
+.client-js {
+	.stable {
+		.toc-mobile {
+			.collapsible-heading {
+				padding-left: .8em;
+				.indicator {
+					margin: 0 0 0 .5em;
+				}
+			}
+		}
+	}
+}

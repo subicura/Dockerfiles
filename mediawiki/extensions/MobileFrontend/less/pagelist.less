@@ -1,0 +1,197 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+
+@itemPaddingV: 12px;
+@thumbGap: 15px;
+@thumbWidth: 70px;
+@thumbSpace: @thumbWidth + @thumbGap;
+@thumbOverlayWidth: @searchBarPaddingLeft;
+@thumbOverlaySpace: @thumbOverlayWidth + @thumbGap;
+@pageSummaryHeaderColor: #404040;
+
+// Pages
+//
+// Styleguide 5.
+
+// Page summary
+//
+// Use the page-summary class whenever describing a page but not showing
+// the full content of the page. This might be used in a page list or a diff.
+//
+// Markup:
+// <div class="page-summary">
+//  <h3>San Francisco</h3>
+//  <p>San Francisco is a city in California in the USA</p>
+// </div>
+//
+// Styleguide 5.1.
+.page-summary {
+	h2,
+	h3 {
+		font: inherit;
+		font-weight: bold;
+		// FIXME: Use one of the grays defined in variables.less
+		color: @colorGray5;
+		a {
+			color: inherit;
+		}
+
+		strong {
+			text-decoration: underline;
+		}
+	}
+}
+
+.list-header {
+	font-weight: bold;
+	font-size: .85em;
+	padding: .5em @contentMargin .4em;
+	background-color: @grayLightest;
+	color: @grayMedium;
+}
+
+.list-thumb {
+	background-repeat: no-repeat;
+	background-position: center center;
+
+	&.list-thumb-none {
+		background-color: @grayLightest;
+		.background-image-svg-quick('images/noimage');
+	}
+
+	&.list-thumb-x {
+		.background-size( 100%, auto );
+	}
+
+	&.list-thumb-y {
+		.background-size( auto, 100% );
+	}
+}
+
+// Lists of pages
+//
+// Use the page-list class when rendering a list of pages.
+// Always render a page-list outside a .content element
+//
+// Markup:
+// <ul class="page-list thumbs">
+//  <li class="page-summary">
+//    <div class="list-thumb"></div>
+//    <div class="title"><h3>San Francisco</h3></div>
+//  </li>
+//  <li  class="page-summary">
+//    <div class="list-thumb list-thumb-none list-thumb-x"></div>
+//    <div class="title"><h3>New York</h3></div>
+//  </li>
+// </ul>
+//
+// Styleguide 5.2.
+// FIXME: This should be one generic class name only
+.page-list,
+.topic-title-list,
+.site-link-list {
+	// needed for rotated watchstars to avoid horizontal scrollbar
+	overflow: hidden;
+
+	li {
+		color: @colorGray6;
+		position: relative;
+		border-bottom: solid 1px @grayLightest;
+		padding: @itemPaddingV @contentMargin;
+		// avoid the gap between thumbnails
+		margin: -1px 0 0;
+		line-height: 1;
+
+		> a {
+			display: block;
+			color: @colorGray6;
+
+			&:active,
+			&:hover,
+			&:visited {
+				text-decoration: none;
+				color: @colorGray6;
+			}
+		}
+	}
+
+	&.thumbs,
+	&.side-list {
+		li {
+			padding-left: @thumbSpace;
+		}
+	}
+
+	&.thumbs {
+		.title {
+			// 22px is the width of the watchlist star, +2px for additional padding
+			padding-right: 24px;
+		}
+	}
+
+	.title {
+
+		h3,
+		.mw-mf-user,
+		.component,
+		.info {
+			margin: .5em 0;
+		}
+	}
+
+	// FIXME: rename to something more general, e.g. .side
+	.list-thumb {
+		position: absolute;
+		width: @thumbWidth;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
+
+	&.side-list .list-thumb {
+		padding: @itemPaddingV @contentMargin;
+		color: @grayDark;
+
+		p {
+			line-height: 1.2;
+			margin: .5em 0;
+		}
+
+		.timestamp {
+			// accommodate for higher font-size of h3 to the right of timestamp
+			margin-bottom: .65em;
+		}
+	}
+
+	// something on watchlist that doesn't exist
+	.title.new h3 {
+		color: @redBase;
+	}
+
+	p {
+		font-size: .9em;
+		// See bug 63610
+		line-height: normal;
+	}
+
+	// FIXME: Add component class to all info classes in currently defined page-lists
+	.info,
+	.component {
+		color: @grayMedium;
+		line-height: 1.2;
+	}
+
+	.info {
+		font-size: .7em;
+		text-transform: uppercase;
+	}
+}
+
+// FIXME: combine with a similar pattern in modules/NotificationsOverlay.less
+@media all and (min-width: @wgMFDeviceWidthTablet) {
+	// FIXME: this should be one generic class name
+	.topic-title-list,
+	.site-link-list {
+		padding: @itemPaddingV @contentPaddingTablet;
+	}
+}

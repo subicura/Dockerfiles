@@ -1,0 +1,64 @@
+@import "minerva.variables";
+@import "minerva.mixins";
+
+
+// Drawers
+//
+// Drawers appear at the bottom of the page and contain CTAs
+// Drawers are hidden when overlays are opened.
+//
+// Styleguide 4.
+
+// Basic drawer styling
+//
+// The close button should appear at the top of the drawer.
+// The visible class needs to be present for the drawer to show.
+//
+// Markup:
+// <div class="drawer visible">
+//  <a class='cancel icon'>close</a>
+//  <p>hello</p>
+// </div>
+//
+// Styleguide 4.1.
+.drawer {
+	text-align: center;
+	padding: 0 @contentMargin 1em;
+
+	&.text {
+		line-height: 1;
+		font-size: .9em;
+		text-align: left;
+		padding-top: .5em;
+	}
+
+	p {
+		line-height: 1.4;
+		margin-top: .5em;
+	}
+
+	p,
+	a:not(:last-child),
+	.mw-ui-button {
+		margin-bottom: 1em;
+	}
+
+	.cancel {
+		display: block;
+		margin: auto;
+
+		// FIXME: Remove when mw-ui-icon in stable
+		&.icon {
+			height: 32px;
+			background-position: 50% 8px;
+		}
+	}
+}
+
+// When overlays are opened drawers do not look good
+.overlay-enabled  {
+	.drawer {
+		// !important to override rules set by animations
+		display: none !important;
+	}
+}

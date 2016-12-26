@@ -1,0 +1,370 @@
+// Component of ui.less
+// FIXME: Move to components/
+@import "minerva.variables";
+@import "minerva.mixins";
+
+/* Left menu */
+@menuBorder: 12px;
+@menuBorderColor: #252525;
+@menuLinkLineHeight: 22px;
+@menuItemFontSize: 1.2em;
+
+@pageLeftListDarkBorderColor: #3e3e3e;
+@pageLeftListMediumBorderColor: #5C5C5C;
+@pageLeftListLightBorderColor: #717171;
+
+#mw-mf-viewport {
+	position: relative;
+	height: 100%;
+}
+
+#mw-mf-page-center {
+	width: 100%;
+	position: relative;
+	z-index: @z-indexMain;
+}
+
+#mw-mf-page-left {
+	float: left;
+}
+
+// Transparent shield hidden by default
+.transparent-shield,
+.navigation-drawer {
+	// don't use display: none because it's not animatable
+	position: absolute;
+	z-index: @z-indexBase;
+	visibility: hidden;
+}
+
+// needs to be more specific than .overlay rules
+.notifications-overlay.navigation-drawer {
+	right: 0;
+
+	height: 100%;
+	width: auto;
+	box-shadow: -5px 0 0 0 rgba(0, 0, 0, 0.3);
+}
+
+// FIXME: Remove this once the nav element is delivered to everyone and cached.
+#mw-mf-page-left,
+nav {
+	font-size: 90%;
+	min-height: 100%;
+	background: @mainMenuBackgroundColor;
+	border-left: solid @menuBorder @menuBorderColor;
+
+
+	.client-js & {
+		.icon-secondary {
+			border: none;
+			position: absolute;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			padding-right: 0;
+			border-left: 1px solid @colorGray7;
+
+			// FIXME: Remove when cache cleared and using mw-ui-icon
+			&.icon {
+				width: 0;
+			}
+		}
+
+		.icon-profile,
+		.mw-ui-icon-profile {
+			// 1px for the logout icon border-left
+			margin-right: @menuLinkLineHeight * 2 + 1;
+		}
+	}
+
+	ul {
+		&:first-child {
+			border-bottom: @menuBorder solid @menuBorderColor;
+
+			li:first-child {
+				border-top: none;
+			}
+		}
+
+		.icon-home {
+			.background-image('images/menu/home.png');
+		}
+
+		.icon-random {
+			.background-image('images/menu/random.png');
+		}
+
+		.icon-watchlist {
+			.background-image('images/menu/watchlist.png');
+		}
+
+		.icon-uploads {
+			.background-image('images/menu/uploads.png');
+		}
+
+		.icon-nearby {
+			.background-image('images/menu/nearby.png');
+		}
+
+		.icon-settings {
+			.background-image('images/menu/settings.png');
+		}
+
+		.icon-secondary-logout {
+			.background-image('images/menu/loginout.png');
+		}
+
+		.icon-profile {
+			.background-image('images/menu/user.png');
+		}
+
+		// FIXME: Remove when mw-ui-icon in stable
+		.icon.icon-anon {
+			.background-image('images/menu/anon.png');
+		}
+
+		li {
+			position: relative; // ensure the logout link in beta can be position absolute
+			font-size: @menuItemFontSize;
+			border-top: 1px solid @colorGray7;
+
+			&:hover {
+				background-color: @colorGray5;
+				margin-left: -@menuBorder;
+				a {
+					border-left: solid @menuBorder #3366BB;
+				}
+			}
+			&:last-child {
+				border-bottom: 1px solid @colorGray7;
+			}
+
+			a {
+				color: white;
+				display: block;
+				padding: @menuLinkLineHeight / 2 10px @menuLinkLineHeight / 2 0;
+
+				&.mw-ui-icon {
+					padding-left: 9px;
+
+					&.mw-ui-icon-element {
+						font-size: round(1 / @menuItemFontSize, 1)
+					}
+				}
+
+				// FIXME: Remove when cache cleared
+				&.icon {
+					// FIXME: Remove when mw-ui-icon in stable
+					background-position: 9px center;
+					padding: @menuLinkLineHeight / 2 10px @menuLinkLineHeight / 2 @menuLinkLineHeight * 2;
+					line-height: @menuLinkLineHeight;
+				}
+
+				&:hover {
+					text-decoration: none;
+				}
+
+				&:visited,
+				&:active {
+					color: white;
+				}
+			}
+		}
+
+		&.hlist {
+			li {
+				font-size: 0.8em;
+				margin: 0;
+				border: none;
+
+				a {
+					color: @colorGray12;
+					border: none;
+					padding: .7em 12px;
+					margin-left: 0;
+				}
+			}
+		}
+	}
+}
+
+body.navigation-enabled {
+
+	#mw-mf-viewport {
+		// disable horizontal scrolling
+		overflow: hidden;
+		// the two following properties are needed to override the height set
+		// by position: fixed fallback on scroll event
+		min-height: 100%;
+		height: auto !important;
+	}
+
+	#mw-mf-page-center {
+		// Since we change the color of the body tag above we need to ensure the content has a white background
+		background: #fff;
+		position: absolute;
+		height: 100%;
+		// Overriden in mainmenuAnimation
+		left: @menuWidth;
+		// set border here (#mw-mf-page-left doesn't expand height)
+		border-left: solid 1px #000;
+		box-shadow: -5px 0 0 0 rgba(0, 0, 0, 0.1);
+	}
+
+	.navigation-drawer,
+	.transparent-shield {
+		visibility: visible;
+	}
+
+	.transparent-shield {
+		background: @semiTransparent;
+		opacity: 1;
+	}
+}
+
+.primary-navigation-enabled {
+	// set background and border here (#mw-mf-page-left doesn't expand height
+	// and #mw-mf-viewport has overflow: hidden and clips blue hover borders)
+	border-left: solid @menuBorder @menuBorderColor;
+	background: @mainMenuBackgroundColor;
+
+	#mw-mf-viewport {
+		margin-left: -@menuBorder;
+	}
+
+	#mw-mf-page-left {
+		width: @menuWidth;
+	}
+
+	.position-fixed {
+		left: @menuWidth !important;
+	}
+}
+
+@media all and (min-width: @wgMFDeviceWidthTablet) {
+	@rightDrawerLeftOffset: 100% - @rightDrawerWidth;
+	.secondary-navigation-enabled {
+		#mw-mf-page-center {
+			left: -@rightDrawerWidth !important;
+			right: @rightDrawerWidth !important;
+			width: auto;
+			.main-header-button {
+				visibility: hidden;
+			}
+		}
+	}
+
+	.notifications-overlay.navigation-drawer {
+		left: @rightDrawerLeftOffset;
+	}
+}
+
+// animated version
+@duration: .25s;
+// Trying to mimic easeOutBack. More info: https://en.wikipedia.org/wiki/B%C3%A9zier_curve
+@easing: cubic-bezier(0.175, 0.885, 0.320, 1.275);
+
+// FIXME: Cleanup animation css
+.animations {
+
+	#mw-mf-page-center {
+		min-height: 100%;
+		// We need to ensure the content has a white background - otherwise it will
+		// overlap the menu during the main menu reveal/hide animation
+		background-color: #fff;
+
+		// *2 to avoid weird glitch of left nav flickering after closing
+		@transition: @duration @easing, height 0s (@duration*2);
+		.transition-transform(@transition);
+	}
+
+	#mw-mf-page-left {
+		width: @menuWidth;
+
+		.transition(visibility 0s @duration);
+	}
+
+	// FIXME: Make animations a conditional class on the drawer itself
+	.notifications-overlay.navigation-drawer {
+		display: block;
+
+		// +2% to accommodate for the border/box-shadow
+		.transform(translate3d(102%, 0, 0));
+		.transition-transform(@duration @easing, visibility 0s @duration;);
+
+		&.visible {
+			.transform(translate3d(0, 0, 0));
+		}
+	}
+}
+
+
+.navigation-enabled {
+
+	.animations {
+		.position-fixed,
+		#mw-mf-page-center {
+			.transition-transform(@duration @easing);
+		}
+	}
+}
+
+.primary-navigation-enabled {
+	.animations {
+		.position-fixed,
+		#mw-mf-page-center {
+			// override non-animated version
+			left: 0 !important;
+			.transform(translate3d(@menuWidth, 0, 0));
+		}
+
+		#mw-mf-page-left {
+			// make menu scrollable when open (on small screens)
+			position: static;
+
+			.transition(none);
+		}
+	}
+}
+
+.secondary-navigation-enabled {
+	.animations {
+		#mw-mf-page-center {
+			// override non-animated version
+			left: 0 !important;
+			.transform(translate3d(-@rightDrawerWidth, 0, 0));
+			width: 100%;
+		}
+	}
+}
+
+.rtl {
+	// FIXME: Make animations a conditional class on the drawer itself
+	.animations .notifications-overlay.navigation-drawer {
+		// +2% to accommodate for the border/box-shadow
+		.transform(translate3d(-102%, 0, 0));
+
+		&.visible {
+			.transform(translate3d(0, 0, 0));
+		}
+	}
+
+	&.primary-navigation-enabled {
+		.animations {
+
+			.position-fixed,
+			#mw-mf-page-center {
+				.transform(translate3d(-@menuWidth, 0, 0));
+			}
+		}
+	}
+
+	&.secondary-navigation-enabled {
+		.animations {
+			#mw-mf-page-center {
+				.transform(translate3d(@rightDrawerWidth, 0, 0));
+			}
+		}
+	}
+}

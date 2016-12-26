@@ -1,0 +1,102 @@
+// FIXME: This file should be shared across repositories
+@import "minerva.variables";
+@import "minerva.mixins";
+@import "mediawiki.mixins";
+
+// FIXME: BEGIN: Find svg versions of all of these and add to icons folder
+// Menu set
+.mw-ui-icon-home {
+	.m-background-image('images/menu/home.png');
+}
+
+.mw-ui-icon-random {
+	.m-background-image('images/menu/random.png');
+}
+
+.mw-ui-icon-watchlist {
+	.m-background-image('images/menu/watchlist.png');
+}
+
+.mw-ui-icon-uploads {
+	.m-background-image('images/menu/uploads.png');
+}
+
+.mw-ui-icon-nearby {
+	.m-background-image('images/menu/nearby.png');
+}
+
+.mw-ui-icon-settings {
+	.m-background-image('images/menu/settings.png');
+}
+
+.mw-ui-icon-secondary-logout {
+	.m-background-image('images/menu/loginout.png');
+}
+
+.mw-ui-icon-profile {
+	.m-background-image('images/menu/user.png');
+}
+
+// FIXME: This should use mw-ui-icon-anonymous in some clever way since they are essentially the same icon
+.mw-ui-icon-anonymous-white {
+	.m-background-image('images/menu/anon.png');
+}
+
+// overlay set
+
+.mw-ui-icon-cancel {
+	.m-background-image('images/cancel.png');
+}
+
+.mw-ui-icon-clear {
+	.m-background-image('images/clear.png');
+}
+
+
+// Uploads set
+.mw-ui-icon-photo {
+	.m-background-image('images/camera.png');
+}
+
+.mw-ui-icon-previous {
+	.m-background-image('images/chevronLeft.png');
+}
+
+.mw-ui-icon-next {
+	.m-background-image('images/chevronRight.png');
+}
+
+// Diffs set
+.mw-ui-icon-bytesadded {
+	.m-background-image('specials/images/positive.png');
+}
+
+.mw-ui-icon-bytesremoved {
+	.m-background-image('specials/images/negative.png');
+}
+
+.mw-ui-icon-bytesneutral {
+	.m-background-image('specials/images/neutral.png');
+}
+
+.mw-ui-icon-back {
+	.m-background-image('images/back-ltr.png');
+}
+// FIXME: END
+
+.mw-ui-icon-spinner {
+	.m-background-image('images/ajax-loader.gif');
+}
+
+// FIXME: Find better workaround for this
+span.mw-ui-icon {
+	// a block inside an inline element is never a good idea - effects line height of mobile diff bytesadded class
+	display: inline-block;
+}
+
+.oo-ui-indicator-spinner {
+	.background-image('images/ajax-loader.gif');
+	.background-size(100%, 100%);
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}

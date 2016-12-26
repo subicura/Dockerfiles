@@ -1,0 +1,22 @@
+{
+	"globals": {
+		"console": true,
+		"jQuery": true,
+		"JsDiff": true,
+		"Hogan": true,
+		"QUnit": true,
+		"mw": true,
+		"CodeMirror": true,
+		"OO": true
+	},
+
+	"browser": true,
+	"curly": true,
+	"eqeqeq": true,
+	"forin": false,
+	"onevar": true,
+	"trailing": true,
+	"undef" : true,
+	"unused": true,
+	"supernew": true
+}
