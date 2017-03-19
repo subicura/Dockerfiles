@@ -10,14 +10,15 @@
 #                         -d subicura/jenkins
 #
 
-FROM ubuntu:14.04
+FROM subicura/ubuntu:14.04
 MAINTAINER chungsub.kim@purpleworks.co.kr
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV TOMCAT_VERION=7.0.68
+ENV TOMCAT_VERSION=7.0.76
+ENV JENKINS_VERSION=1.651.3
 
 # update ubuntu latest
-RUN echo "2016.04.08"
+RUN echo "2017.03.19"
 RUN \
   apt-get -qq update && \
   apt-get -qq -y dist-upgrade
@@ -44,14 +45,14 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 RUN \
   mkdir /app && \
   cd /app && \
-  wget -q -O - http://mirror.apache-kr.org/tomcat/tomcat-7/v${TOMCAT_VERION}/bin/apache-tomcat-${TOMCAT_VERION}.tar.gz | tar xfz - && \
-  ln -s apache-tomcat-${TOMCAT_VERION} tomcat
+  wget -q -O - http://archive.apache.org/dist/tomcat/tomcat-7/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz | tar xfz - && \
+  ln -s apache-tomcat-${TOMCAT_VERSION} tomcat
 
 # install jenkins
 RUN \
   cd /app/tomcat/webapps && \
   rm -rf * && \
-  wget -q http://mirrors.jenkins-ci.org/war/latest/jenkins.war -O ROOT.war
+  wget -q http://mirrors.jenkins.io/war-stable/${JENKINS_VERSION}/jenkins.war -O ROOT.war
 
 # install rbenv
 RUN \
@@ -61,14 +62,10 @@ RUN \
 
 # install node
 RUN \
-  curl -sL https://deb.nodesource.com/setup_5.x | bash - && \
+  curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
   apt-get -qq -y install nodejs && \
   npm install -g bower && \
   npm install -g grunt-cli
-
-# install docker
-RUN \
-  curl -sSL https://get.docker.com/ | sh
 
 # setup jenkins
 WORKDIR /app
