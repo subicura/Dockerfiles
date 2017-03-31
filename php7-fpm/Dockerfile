@@ -11,9 +11,9 @@ FROM subicura/ubuntu:14.04
 
 MAINTAINER subicura@subicura.com
 
-ENV XDEBUG_VERSION 2.4.0
-ENV V8_VERSION 5.1.285
-ENV V8JS_VERSION 1.2.0
+ENV XDEBUG_VERSION 2.5.1
+ENV V8_VERSION 5.9.142
+ENV V8JS_VERSION 1.3.6
 
 # install php7.0 fpm
 RUN apt-get -qq -y install build-essential wget && \
@@ -24,20 +24,23 @@ RUN apt-get -qq -y install build-essential wget && \
   		php7.0-pspell php7.0-recode php7.0-tidy php7.0-xmlrpc php7.0-xsl php7.0-mbstring
 
 # install v8
-RUN apt-get -qq -y install php7.0-dev git subversion
+RUN apt-get -qq -y install php7.0-dev git subversion libglib2.0-dev
 RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /usr/local/depot_tools
 ENV PATH $PATH:/usr/local/depot_tools
 RUN mkdir -p /tmp/src && cd /tmp/src && fetch v8 && cd v8 && git checkout ${V8_VERSION} && gclient sync && \
-    make native library=shared snapshot=off -j8 && \
-    mkdir -p /usr/lib /usr/include && \
-    cp out/native/lib.target/lib*.so /usr/lib/ && \
-    cp -R include/* /usr/include && \
-	echo "create /usr/lib/libv8_libplatform.a\naddlib out/native/obj.target/tools/gyp/libv8_libplatform.a\nsave\nend" | sudo ar -M && \
-    make clean && rm -rf /tmp/src/v8
+	echo "# Setup GN" && \
+    tools/dev/v8gen.py -vv x64.release -- is_component_build=true && \
+	echo "# Build" && \
+	ninja -C out.gn/x64.release/ && \
+	echo "# Install to /opt/v8/" && \
+	sudo mkdir -p /opt/v8/lib /opt/v8/include && \
+	sudo cp out.gn/x64.release/lib*.so out.gn/x64.release/*_blob.bin /opt/v8/lib/ && \
+	sudo cp -R include/* /opt/v8/include/ && \
+    rm -rf /tmp/src/v8
 
 RUN git clone -b ${V8JS_VERSION} https://github.com/phpv8/v8js.git /tmp/src/v8js && \
 	cd /tmp/src/v8js && \
-	phpize && ./configure && \
+	phpize && ./configure --with-v8js=/opt/v8 && \
 	make all install && \
 	make clean && rm -rf /tmp/src/v8js
 

@@ -10,8 +10,8 @@ MAINTAINER subicura@subicura.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN echo "20170313"
-RUN sed -i -e 's/archive.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
+RUN echo "20170331"
+# RUN sed -i -e 's/archive.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get -y upgrade
 
