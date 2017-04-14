@@ -23,6 +23,9 @@ RUN apt-get -qq -y install build-essential wget && \
   		php-pear php7.0-imap php7.0-soap php7.0-mcrypt php7.0-ps \
   		php7.0-pspell php7.0-recode php7.0-tidy php7.0-xmlrpc php7.0-xsl php7.0-mbstring
 
+# Use 7.0 (not 7.1)
+RUN echo 1 | update-alternatives --config php
+
 # install v8
 RUN apt-get -qq -y install php7.0-dev git subversion libglib2.0-dev
 RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /usr/local/depot_tools
