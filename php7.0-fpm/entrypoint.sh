@@ -21,4 +21,6 @@ if [ ! -z "$PHP7_FPM_XDEBUG_REMOTE_HOST" ]; then
 	fi
 fi
 
+mkdir -p /run/php
+
 exec "$@"
