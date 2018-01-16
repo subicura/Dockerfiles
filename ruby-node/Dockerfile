@@ -2,7 +2,7 @@
 # ubuntu latest upgrade version
 #
 # build:
-#   docker build --force-rm=true -t subicura/ruby-node:2.3_6 .
+#   docker build --force-rm=true -t subicura/ruby-node:2.3_8 .
 
 FROM subicura/ubuntu:16.04
 
@@ -19,9 +19,9 @@ RUN \
   apt-get -qq -y install ruby2.3 ruby2.3-dev && \
   gem install bundler --no-ri --no-rdoc
 
-# install node 6
+# install node 8
 RUN \
-    wget -qO- https://deb.nodesource.com/setup_6.x | bash - && \
+    wget -qO- https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get -qq -y install nodejs
 
 

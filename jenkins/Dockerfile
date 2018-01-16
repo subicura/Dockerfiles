@@ -1,112 +1,47 @@
-#
-# jenkins 1.6x (http://jenkins-ci.org)
-#
-# build:
-#   docker build --force-rm=true -t subicura/jenkins .
-# run:
-#   docker run -p 80:8080 -v /home/ubuntu/jenkins:/app/jenkins \
-#                         -v /var/run/docker.sock:/var/run/docker.sock \
-#                         -v /usr/bin/docker:/usr/bin/docker \
-#                         -d subicura/jenkins
-#
+FROM jenkins/jenkins:lts
+LABEL maintainer "Junghoon Kim <k@purpleworks.co.kr>"
 
-FROM subicura/ubuntu:14.04
-MAINTAINER chungsub.kim@purpleworks.co.kr
+USER root
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV TOMCAT_VERSION=7.0.76
-ENV JENKINS_VERSION=1.651.3
+RUN apt-get update \
+    && apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common \
+    && curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add - \
+    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable" \
+    && apt-get update \
+    && apt-get install -y docker-ce \
+	&& rm -rf /var/lib/apt/lists/*
 
-# update ubuntu latest
-RUN echo "2017.03.19"
-RUN \
-  apt-get -qq update && \
-  apt-get -qq -y dist-upgrade
+ENV DOCKER_COMPOSE_VERSION 1.18.0
 
-# install essential packages
-RUN \
-  apt-get -qq -y install build-essential software-properties-common git wget curl
+RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
+    && chmod +x /usr/local/bin/docker-compose
 
-# install dev library
-RUN \
-  apt-get -qq -y install bison openssl telnet libreadline6 libreadline6-dev curl libcurl3 libcurl3-gnutls libcurl4-openssl-dev \
-    git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev \
-    libxslt-dev autoconf libc6-dev ncurses-dev libffi-dev libmysqlclient-dev imagemagick libmagickcore-dev libmagickwand-dev
+ARG user=jenkins
 
-# install java
-RUN \
-  echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get -qq update && \
-  apt-get -qq -y install oracle-java7-installer && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf /var/cache/oracle-jdk7-installer
-ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
+USER ${user}
 
-# install tomcat
-RUN \
-  mkdir /app && \
-  cd /app && \
-  wget -q -O - http://archive.apache.org/dist/tomcat/tomcat-7/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz | tar xfz - && \
-  ln -s apache-tomcat-${TOMCAT_VERSION} tomcat
-
-# install jenkins
-RUN \
-  cd /app/tomcat/webapps && \
-  rm -rf * && \
-  wget -q http://mirrors.jenkins.io/war-stable/${JENKINS_VERSION}/jenkins.war -O ROOT.war
-
-# install rbenv
-RUN \
-  git clone https://github.com/sstephenson/rbenv.git ~/.rbenv && \
-  mkdir -p ~/.rbenv/plugins && \
-  git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-
-# install node
-RUN \
-  curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-  apt-get -qq -y install nodejs && \
-  npm install -g bower && \
-  npm install -g grunt-cli
-
-# setup jenkins
-WORKDIR /app
-ENV JENKINS_HOME /app/jenkins/home
-
-# add plugins
-RUN mkdir -p /app/plugins
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/scm-api.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/git.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/git-client.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/git-server.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/workflow-step-api.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ssh-agent.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/slack.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/violations.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ansicolor.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/gitlab-hook.hpi
-
-# add plugins (ruby)
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rbenv.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rake.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/ruby-runtime.hpi
-RUN wget -q -P /app/plugins http://updates.jenkins-ci.org/latest/rubyMetrics.hpi
-
-# env
-RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-ENV TERM xterm
-
-# volume
-VOLUME ["/app/jenkins"]
-
-# expose
-EXPOSE 8080
-
-# run
-RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
-ADD run.sh /app/run.sh
-CMD /app/run.sh
-
+# Install Jenkins plugins
+RUN install-plugins.sh \
+    ant \
+    antisamy-markup-formatter \
+    blueocean \
+    bouncycastle-api \
+    build-timeout \
+    command-launcher \
+    docker-workflow \
+    email-ext \
+    gradle \
+    git \
+    ldap \
+    locale \
+    mapdb-api \
+    matrix-auth \
+    pam-auth \
+    pipeline-github-lib \
+    pipeline-stage-view \
+    resource-disposer \
+    ssh-slaves \
+    subversion \
+    timestamper \
+    workflow-aggregator \
+    ws-cleanup 
