@@ -3,20 +3,10 @@ LABEL maintainer "Junghoon Kim <k@purpleworks.co.kr>"
 
 USER root
 
-RUN apt-get update \
-    && apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common \
-    && curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add - \
-    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable" \
-    && apt-get update \
-    && apt-get install -y docker-ce \
-	&& rm -rf /var/lib/apt/lists/*
-
-ENV DOCKER_COMPOSE_VERSION 1.18.0
-
-RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
-    && chmod +x /usr/local/bin/docker-compose
-
-ARG user=jenkins
+ENV DOCKER_VERSION 17.12.0-ce
+ENV DOCKER_COMPOSE_VERSION 1.19.0
+RUN curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz | tar --strip-components=1 -xz -C /usr/local/bin docker/docker
+RUN curl -fsSL https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 
 USER ${user}
 
@@ -40,6 +30,7 @@ RUN install-plugins.sh \
     pipeline-github-lib \
     pipeline-stage-view \
     resource-disposer \
+    slack \
     ssh-slaves \
     subversion \
     timestamper \
