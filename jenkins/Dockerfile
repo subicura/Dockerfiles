@@ -3,6 +3,9 @@ LABEL maintainer "Chungsub Kim <subicura@subicura.com>"
 
 USER root
 
+RUN apt-get update
+RUN apt-get install -yqq libltdl-dev
+
 ENV DOCKER_VERSION 18.09.0
 ENV DOCKER_COMPOSE_VERSION 1.23.2
 RUN curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz | tar --strip-components=1 -xz -C /usr/local/bin docker/docker
