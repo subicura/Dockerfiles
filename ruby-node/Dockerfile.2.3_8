@@ -2,14 +2,14 @@
 # ubuntu latest upgrade version
 #
 # build:
-#   docker build --force-rm=true -t subicura/ruby-node:2.5_12 .
+#   docker build --force-rm=true -t subicura/ruby-node:2.3_8.1 .
 
 FROM ubuntu:18.04
 
 MAINTAINER subicura@subicura.com
 
 RUN \
-  echo 20200124 && \
+  echo 20200123 && \
   apt-get -qq update
 ENV DEBIAN_FRONTEND noninteractive
 RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
@@ -23,12 +23,12 @@ RUN \
 RUN \
   add-apt-repository -y ppa:brightbox/ruby-ng && \
   apt-get -qq update && \
-  apt-get -qq -y install ruby2.5 ruby2.5-dev && \
-  gem install bundler --no-ri --no-rdoc --source http://rubygems.org
+  apt-get -qq -y install ruby2.3 ruby2.3-dev && \
+  gem install bundler -v 1.16.0 --no-ri --no-rdoc --source http://rubygems.org
 
 # install node 8
 RUN \
-    wget -qO- https://deb.nodesource.com/setup_12.x | bash - && \
+    wget -qO- https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get -qq -y install nodejs
 
 
