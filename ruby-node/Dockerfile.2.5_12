@@ -2,32 +2,31 @@
 # ubuntu latest upgrade version
 #
 # build:
-#   docker build --force-rm=true -t subicura/ruby-node:2.5_12 .
+#   docker build --force-rm=true -f Dockerfile.2.5_12 -t subicura/ruby-node:2.5_12.1 .
 
 FROM ubuntu:18.04
 
-MAINTAINER subicura@subicura.com
+LABEL maintainer="chungsub.kim@purpleworks.co.kr"
+
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN \
-  echo 20200124 && \
+  echo 20200127 && \
   apt-get -qq update
-ENV DEBIAN_FRONTEND noninteractive
 
 # install essential packages
 RUN \
   apt-get -qq -y install build-essential software-properties-common git curl wget \
     libcurl3-gnutls libcurl4-openssl-dev gnupg libssl-dev libcrypto++-dev
   
-# install ruby2.3
+# install ruby2.5
 RUN \
   add-apt-repository -y ppa:brightbox/ruby-ng && \
   apt-get -qq update && \
   apt-get -qq -y install ruby2.5 ruby2.5-dev && \
-  gem install bundler --no-ri --no-rdoc --source http://rubygems.org
+  gem install bundler -v 1.16.0 --no-ri --no-rdoc
 
-# install node 8
+# install node 12
 RUN \
     wget -qO- https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get -qq -y install nodejs
-
-

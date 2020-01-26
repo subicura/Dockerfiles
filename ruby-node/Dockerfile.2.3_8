@@ -12,7 +12,6 @@ RUN \
   echo 20200123 && \
   apt-get -qq update
 ENV DEBIAN_FRONTEND noninteractive
-RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
 # install essential packages
 RUN \
