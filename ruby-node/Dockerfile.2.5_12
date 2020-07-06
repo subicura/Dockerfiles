@@ -2,7 +2,7 @@
 # ubuntu latest upgrade version
 #
 # build:
-#   docker build --force-rm=true -f Dockerfile.2.5_12 -t subicura/ruby-node:2.5_12.1 .
+#   docker build --force-rm=true -f Dockerfile.2.5_12 -t subicura/ruby-node:2.5_12.3 .
 
 FROM ubuntu:18.04
 
@@ -11,7 +11,7 @@ LABEL maintainer="chungsub.kim@purpleworks.co.kr"
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN \
-  echo 20200127 && \
+  echo 20200628 && \
   apt-get -qq update
 
 # install essential packages
